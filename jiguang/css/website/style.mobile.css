@@ -1,0 +1,158 @@
+.nav {
+    height: 100px;
+    text-align: center;
+    position: fixed;
+    border-bottom: 1px solid #dddddd;
+    z-index: 999;
+}
+.section-blank {
+    height: 100px;
+}
+.nav .mobile-toggle-icon {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    left: 0;
+    top: 10px;
+    position: absolute;
+}
+.nav .menu-icon {
+    background: url("../../img/website/nav_menu.png") no-repeat center center;
+}
+.nav .close-icon {
+    background: url("../../img/website/nav_close.png") no-repeat center center;
+}
+.nav .logo {
+    display: inline-block;
+    position: static;
+    background: url('../../img/website/datatrum_logo.png') no-repeat center center;
+    background-size: contain;
+    height: 60px;
+    width: 400px;
+    margin-top: 20px;
+}
+.nav .menu-box {
+    padding-top: 2vh;
+    display: none;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+    top: 100px;
+    border-top: 1px solid #dddddd;
+}
+.nav .menu-box .top-ul {
+    height: auto;
+    line-height: inherit;
+}
+.nav .menu-box .top-li {
+    display: block;
+    width: 300px;
+    height: auto;
+    margin: 0 auto;
+    text-align: left;
+}
+.nav .menu-box .top-li:nth-child(2) {
+    width: 300px;
+}
+.nav .menu-box .top-li .text {
+    font-size: 55px;
+    font-family:  helvetica, "microsoft yahei", sans-serif;
+    font-weight: bold;
+}
+.nav .menu-box .top-li .sub-ul {
+    opacity: 1;
+    position: static;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    display: block;
+}
+.nav .menu-box .top-li:nth-child(1) .sub-ul {
+    border: none;
+}
+.nav .menu-box .top-li:nth-child(2) .sub-ul {
+    border: none;
+}
+.nav .menu-box .top-li .sub-li {
+    width: 400px;
+    height: auto;
+}
+.nav .menu-box .top-li .sub-li>a {
+    display: inline-block;
+    height: 5vh;
+    line-height: 5vh;
+}
+.nav .menu-box .top-li .sub-li .mobile-sub-li-icon {
+    background: url("../../img/website/nav_sub_list.png") no-repeat center center;
+    display: inline-block;
+    width: 60px;
+    height: 50px;
+    vertical-align: middle;
+}
+.nav .menu-box .top-li .sub-li .text {
+    font-size: 50px;
+    color: #746caf;
+    vertical-align: middle;
+    font-family:  helvetica, "microsoft yahei", sans-serif;
+}
+.nav .menu-box .top-li:hover,
+.nav .menu-box .top-li:nth-child(1):hover,
+.nav .menu-box .top-li:nth-child(2):hover,
+.nav .menu-box .top-li:nth-child(3):hover {
+    border:none;
+}
+
+.nav .menu-box .top-li:nth-child(1):hover .text,
+.nav .menu-box .top-li:nth-child(2):hover .text,
+.nav .menu-box .top-li:nth-child(3):hover .text {
+    color: #473e86;
+}
+.nav .menu-box .top-li:nth-child(1) .sub-li:hover .text,
+.nav .menu-box .top-li:nth-child(2) .sub-li:hover .text {
+    color: #746caf;
+}
+.nav .menu-box .top-li .sub-li .separate-line {
+    display: none;
+}
+.nav .menu-box .top-li>a {
+    height: 6vh;
+    line-height: 6vh;
+    display: inline-block;
+}
+
+
+.nav .control {
+    top: 13px;
+}
+.nav .control .action {
+    width: 80px;
+    height: 40px;
+    margin-left: 10px;
+    line-height: 40px;
+    font-size: 20px;
+}
+
+.login_dropdown_logged_in {
+    margin-top: -4px;
+}
+.login_dropdown_logged_in #account_off > span {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 20px;
+}
+.login_dropdown_logged_in #account_off > a {
+    font-size: 26px;
+}
+
+
+.sms-page .section-one .title {
+    padding-top: 25vh;
+}
+.sms-page .section-one .modal-wrapper .part-1 {
+    right: 700px;
+}
+.sms-page .section-one .modal-wrapper .part-3 {
+    left: 700px;
+}

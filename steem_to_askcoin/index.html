@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Askcoin</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="images/favicon/apple-touch-icon-57x57.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/favicon/apple-touch-icon-114x114.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/favicon/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/favicon/apple-touch-icon-144x144.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="images/favicon/apple-touch-icon-60x60.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="images/favicon/apple-touch-icon-120x120.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="images/favicon/apple-touch-icon-76x76.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="images/favicon/apple-touch-icon-152x152.png"/>
+    <link rel="icon" type="image/png" href="images/favicon/favicon-196x196.png" sizes="196x196"/>
+    <link rel="icon" type="image/png" href="images/favicon/favicon-96x96.png" sizes="96x96"/>
+    <link rel="icon" type="image/png" href="images/favicon/favicon-32x32.png" sizes="32x32"/>
+    <link rel="icon" type="image/png" href="images/favicon/favicon-16x16.png" sizes="16x16"/>
+    <link rel="icon" type="image/png" href="images/favicon/favicon-128x128.png" sizes="128x128"/>
+    <meta name="application-name" content="&nbsp;"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF"/>
+    <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png"/>
+    <meta name="msapplication-square70x70logo" content="images/favicon/mstile-70x70.png"/>
+    <meta name="msapplication-square150x150logo" content="images/favicon/mstile-150x150.png"/>
+    <meta name="msapplication-wide310x150logo" content="images/favicon/mstile-310x150.png"/>
+    <meta name="msapplication-square310x310logo" content="images/favicon/mstile-310x310.png"/>
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css">
+
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Askcoin - xxx">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
+
+    <meta property="og:url" content="https://askcoin.io"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="Askcoin"/>
+    <meta property="og:title" content="Askcoin - xxx"/>
+    <meta property="og:description"
+          content="Askcoin is xxx"/>
+    <meta property="og:image" content="https://askcoin.io/images/askcoin.png"/>
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@askcoin"/>
+    <meta name="twitter:title" content="Askcoin - xxx"/>
+    <meta name="twitter:description"
+          content="Askcoin is xxx"/>
+    <meta name="twitter:image" content="https://askcoin.io/images/askcoin.png"/>
+
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script type='text/javascript'>
+        if (typeof jQuery != 'undefined') {
+            var filetypes = /\.(zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i;
+            var baseHref = '';
+            if (jQuery('base').attr('href') != undefined) baseHref = jQuery('base').attr('href');
+            var hrefRedirect = '';
+
+            jQuery('body').on('click', 'a', function (event) {
+                var el = jQuery(this);
+                var track = true;
+                var href = (typeof(el.attr('href')) != 'undefined' ) ? el.attr('href') : '';
+                var isThisDomain = href.match(document.domain.split('.').reverse()[1] + '.' + document.domain.split('.').reverse()[0]);
+                if (!href.match(/^javascript:/i)) {
+                    var elEv = [];
+                    elEv.value = 0, elEv.non_i = false;
+                    if (href.match(/^mailto\:/i)) {
+                        elEv.category = 'email';
+                        elEv.action = 'click';
+                        elEv.label = href.replace(/^mailto\:/i, '');
+                        elEv.loc = href;
+                    }
+                    else if (href.match(filetypes)) {
+                        var extension = (/[.]/.exec(href)) ? /[^.]+$/.exec(href) : undefined;
+                        elEv.category = 'download';
+                        elEv.action = 'click-' + extension[0];
+                        elEv.label = href.replace(/ /g, '-');
+                        elEv.loc = baseHref + href;
+                    }
+                    else if (href.match(/^https?\:/i) && !isThisDomain) {
+                        elEv.category = 'external';
+                        elEv.action = 'click';
+                        elEv.label = href.replace(/^https?\:\/\//i, '');
+                        elEv.non_i = true;
+                        elEv.loc = href;
+                    }
+                    else if (href.match(/^tel\:/i)) {
+                        elEv.category = 'telephone';
+                        elEv.action = 'click';
+                        elEv.label = href.replace(/^tel\:/i, '');
+                        elEv.loc = href;
+                    }
+                    else track = false;
+
+                    if (track) {
+                        var ret = true;
+
+                        if ((elEv.category == 'external' || elEv.category == 'download') && (el.attr('target') == undefined || el.attr('target').toLowerCase() != '_blank')) {
+                            hrefRedirect = elEv.loc;
+
+                            ga('send', 'event', elEv.category.toLowerCase(), elEv.action.toLowerCase(), elEv.label.toLowerCase(), elEv.value, {
+                                'nonInteraction': elEv.non_i,
+                                'hitCallback': gaHitCallbackHandler
+                            });
+
+                            ret = false;
+                        }
+                        else {
+                            ga('send', 'event', elEv.category.toLowerCase(), elEv.action.toLowerCase(), elEv.label.toLowerCase(), elEv.value, {
+                                'nonInteraction': elEv.non_i
+                            });
+                        }
+
+                        return ret;
+                    }
+                }
+            });
+
+            gaHitCallbackHandler = function () {
+                window.location.href = hrefRedirect;
+            }
+        }
+    </script>
+
+    <style type="text/css">
+        .wf-loading,
+        .wf-loading h2 {
+            /* Hide the blog title and post titles while web fonts are loading */
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+<div class="navbar navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/"><img class="logo img-responsive" src="images/askcoin.png" alt="Askcoin Logo"/></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/#join">Join</a></li>
+                <li><a href="/#video">Video</a></li>
+                <li><a href="/#whitepaper">White Paper</a></li>
+                <li><a href="/#faq">FAQ</a></li>
+                <li><a href="/#rewards">Rewards</a></li>
+                <li><a href="/#exchanges">Exchanges</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<section class="teaser img-responsive img-retina">
+    <div class="slogan animated fadeInDown mtl ptl">
+        <center>
+            <div id="getting-started">
+            </div>
+            <h2 class="pitch ">
+                <i>Askcoin</i> is a blockchain-based social media platform where <strong>anyone</strong> can earn <strong>rewards</strong>.
+            </h2>
+            <hr class="askcoin">
+            <div class="btn-group" role="group" aria-label="Links">
+                <a type="button" class="btn btn-primary" href="#intro-ex"><strong>Get ASKCOIN</strong></a>
+                <a type="button" class="btn btn-primary" href="https://askcoin.com" target="_blank"><strong>Explore ASKCOIN</strong></a>
+            </div>
+        </center>
+    </div>
+    <div class="icon-scroll animated fadeInDown ">
+        <div class="mouse">
+            <div class="wheel"></div>
+        </div>
+        <div>
+            <span class="a1"></span>
+            <span class="a2"></span>
+            <span class="a3"></span>
+        </div>
+    </div>
+</section>
+<center>
+    <img style="margin-top: -9.5rem;" class="text-center align-center animated fadeInDown img-responsive img-retina pbl" src="images/bg/phone.svg"/>
+</center>
+<section id="intro-involved mtl">
+    <a name="join"/>&nbsp;</a>
+    <div class="container">
+        <div class="row ">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+
+                <h2 name="getinvolved" class="text-center">Join the movement</h2>
+                <hr class="askcoin">
+                <ul class="features">
+
+                    <li class="col-xs-12 col-md-6 ">
+                        <!--  <a href="/getinvolved/posting-rewards/"> -->
+
+                        <img class="feature-img" src="images/askcoin.png"/>
+                        <br/>
+
+                        <b>Posting Rewards</b>
+                        <br/>Earn ASKCOIN every time you post content valued by others.
+                    </li>
+
+                    <li class="col-xs-12 col-md-6 ">
+                        <!--  <a href="/getinvolved/paid-to-curate/"> -->
+
+                        <img class="feature-img" src="images/askcoin.png"/>
+                        <br/>
+
+                        <b>Curation Rewards</b>
+                        <br/>Earn ASKCOIN by being the first to upvote popular content
+                    </li>
+
+                    <li class="col-xs-12 col-md-6 ">
+                        <!--  <a href="/getinvolved/askcoin-currency/"> -->
+
+                        <img class="feature-img" src="images/askcoin.png"/>
+                        <br/>
+
+                        <b>Commitment Rewards</b>
+                        <br/>Askcoin rewards long-term commitment!
+                    </li>
+
+                    <li class="col-xs-12 col-md-6 ">
+                        <!--  <a href="/getinvolved/askcoin-backed-dollars/"> -->
+
+                        <img class="feature-img" src="images/askcoin.png"/>
+                        <br/>
+
+                        <b>Savings Rewards</b>
+                        <br/>Askcoin Dollar rewards bring stability to you
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="intro-video">
+    <a name="video"/>&nbsp;</a>
+    <div class="container vpc" data-vp-add-class="animated fadeIn " data-vp-remove-after-animation="true">
+        <h2 class="text-center  ">Watch the video…</h2>
+        <hr class="askcoin">
+        <div class="row">
+            <div class="col-sm-12 col-md-8 col-md-offset-2">
+                <div class="wrapper-video pal">
+                    <div align="center" class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/xZmpCAqD7hs"
+                                frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- .row -->
+        </div>
+        <!-- .span6 -->
+    </div>
+</section>
+<section id="intro-doc" class="vpc" data-vp-add-class="animated fadeIn">
+    <a name="whitepaper"/>&nbsp;</a>
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-10 col-md-offset-1 mtl mbl ">
+                <div class="col-sm-12 mtm text-center pbl mbl">
+
+                    <h2>Askcoin White Paper</h2>
+                    <hr class="askcoin">
+                    <img class="img-responsive img-retina" src="images/askcoin.png"/>
+
+                    <p>
+                        Collectively, user-generated content has created billions of dollars worth of value for the
+                        shareholders of social media companies, such as Reddit, Facebook, and Twitter. Askcoin supports
+                        social media and online communities by returning much of its value to the people who provide
+                        contributions by rewarding them with virtual currency.
+                    </p>
+
+                    <p>
+                        <a class="btn  btn-primary" href="/AskcoinWhitePaper.pdf" target="_blank">Download</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="intro-testimonial">
+    <a name="testimonial"/>&nbsp;</a>
+    <div class="container">
+        <h2 class="text-center">What people are saying…</h2>
+        <hr class="askcoin">
+        <div class="row">
+            <div class="col-md-12" data-wow-delay="0.8s">
+                <div class="carousel slide" data-ride="carousel" id="quote-carousel">
+                    <!-- Bottom Carousel Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#quote-carousel" data-slide-to="0" class="active"><img class="img-responsive "
+                                                                                                src="images/askcoin.png"
+                                                                                                alt="">
+                        </li>
+                        <li data-target="#quote-carousel" data-slide-to="1"><img class="img-responsive"
+                                                                                 src="images/askcoin.png"
+                                                                                 alt="">
+                        </li>
+                        <li data-target="#quote-carousel" data-slide-to="2"><img class="img-responsive"
+                                                                                 src="images/askcoin.png"
+                                                                                 alt="">
+                        </li>
+                    </ol>
+
+                    <!-- Carousel Slides / Quotes -->
+                    <div class="carousel-inner text-center">
+
+                        <!-- Quote 1 -->
+                        <div class="item active">
+                            <blockquote>
+                                <div class="row">
+                                    <div class="col-sm-8 col-sm-offset-2">
+
+                                        <p>I just made my first post to Askcoin. I really love the concept and I am
+                                            excited to see what comes next.</p>
+                                        <small>Tatiana Moroz, Singer, Songwriter, Innovator</small>
+                                    </div>
+                                </div>
+                            </blockquote>
+                        </div>
+                        <!-- Quote 2 -->
+                        <div class="item">
+                            <blockquote>
+                                <div class="row">
+                                    <div class="col-sm-8 col-sm-offset-2">
+
+                                        <p>
+                                            Askcoin has tremendous potential. Its innovative way to reward both content
+                                            creation and voting consensus may solve problems found with typical social
+                                            media services.</p>
+                                        <small>James Stroud, CEO, CryptoCertify</small>
+                                    </div>
+                                </div>
+                            </blockquote>
+                        </div>
+                        <!-- Quote 3 -->
+                        <div class="item">
+                            <blockquote>
+                                <div class="row">
+                                    <div class="col-sm-8 col-sm-offset-2">
+
+                                        <p>Askcoin is one of the most interesting blockchain projects I've seen this
+                                            year.</p>
+                                        <small>Adam B. Levine, Founder of the Let’s Talk Bitcoin podcast, the LTB
+                                            Network, and Tokenly
+                                        </small>
+                                    </div>
+                                </div>
+                            </blockquote>
+                        </div>
+                    </div>
+
+                    <!-- Carousel Buttons Next/Prev -->
+                    <a data-slide="prev" href="#quote-carousel" class="left carousel-control"><i
+                            class="fa fa-chevron-left"></i></a>
+                    <a data-slide="next" href="#quote-carousel" class="right carousel-control"><i
+                            class="fa fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="intro-ex" class="vpc" data-vp-add-class="animated fadeIn">
+    <a name="exchanges"/>&nbsp;</a>
+    <div class="container">
+        <h2 class="text-center  ">Exchanges</h2>
+        <hr class="askcoin">
+        <div class="col-sm-12">
+            <div class="row">
+                <!-- Poloniex -->
+                <a target="_blank" href="https://poloniex.com/exchange#btc_askcoin">
+                    <div class="col-sm-6">
+                        <span class="box1">
+                            <img class="img-responsive" src="images/askcoin.png">
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Openledger -->
+                <a target="_blank" href="https://bitshares.openledger.info/market/OPEN.ASKCOIN_OPEN.BTC">
+                    <div class="col-sm-6">
+                        <span class="box1">
+                            <img class="img-responsive" src="images/askcoin.png">
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Bittrex -->
+                <a target="_blank" href="https://bittrex.com/Market/Index?MarketName=BTC-ASKCOIN">
+                    <div class="col-sm-6">
+                        <span class="box1">
+                            <img class="img-responsive" src="images/askcoin.png">
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Shapeshift -->
+                <a target="_blank" href="https://shapeshift.io/#/coins">
+                    <div class="col-sm-6">
+                        <span class="box1">
+                            <img class="img-responsive" src="images/askcoin.png">
+                        </span>
+                    </div>
+                </a>
+            </div>
+            <!-- .row -->
+        </div>
+        <!-- .span6 -->
+    </div>
+</section>
+<section id="intro-faq" class="vpc" data-vp-add-class="animated fadeIn">
+    <a name="faq"/>&nbsp;</a>
+    <div class="container">
+        <h2 class="text-center">FAQ</h2>
+        <hr class="askcoin">
+        <div class="row">
+            <div class="col-sm-12 col-md-10 col-md-offset-1">
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Frequently asked questions</div>
+                    <div class="panel-body">
+                        <div class="accordion" id="accordion2">
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <button type="button" class="accordion-toggle list-group-item"
+                                            data-toggle="collapse" data-parent="#accordion2" data-target="#workOne">
+                                        <strong>How is Askcoin different from tipping platforms?</strong>
+                                    </button>
+                                </div>
+                                <div id="workOne" class="accordion-body collapse">
+                                    <div class="accordion-inner"></div>
+                                    <p class="pam">
+
+                                        Cryptocurrency tipping platforms require users to give something up to reward
+                                        other for their contributions. With Askcoin, rewarding others is as simple as
+                                        voting for a post, such you may on Reddit, or as you would Like a post on
+                                        Facebook. </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <button type="button" class="accordion-toggle list-group-item" data-toggle="collapse"
+                                        data-parent="#accordion2" data-target="#workTwo">
+                                    <strong> How are content creators and curators paid?</strong>
+                                </button>
+                            </div>
+                            <div id="workTwo" class="accordion-body collapse">
+                                <div class="accordion-inner">
+                                    <p class="pam">
+                                        The blockchain distributes payouts as 50% Askcoin Power for voting and 50% Askcoin
+                                        Dollars. Rewards are distributed by the blockchain, similar to how miners are
+                                        paid by Bitcoin, and occur roughly 24 hours after content and votes have been
+                                        submitted.
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <button type="button" class="accordion-toggle list-group-item" data-toggle="collapse"
+                                        data-parent="#accordion2" data-target="#workThree">
+                                    <strong> Why Askcoin?</strong>
+                                </button>
+                            </div>
+                            <div id="workThree" class="accordion-body collapse">
+                                <div class="accordion-inner">
+                                    <p class="pam">
+                                        Askcoin is a form of ask, which means to prize or value. Askcoin is also a
+                                        homophone for steam, which is frequently associated with power, and a step
+                                        further, steam powered trains gave influence to English idioms, such as ‘this
+                                        conversation is picking up steam.’ The associations with prizing, language and
+                                        empowerment only felt right.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="intro-who">
+    <div class="container vpc" data-vp-add-class="animated fadeIn " data-vp-remove-after-animation="true">
+        <h2 class="text-center">Who should Askcoin?</h2>
+        <hr class="askcoin">
+        <div class="row text-center">
+            <div class="col-sm-12 col-md-8 col-md-offset-2">
+                <div class="col-sm-12">
+                    <div class="col-md-4">
+                        <img src="images/askcoin.png">
+
+                        <h3>Entrepreneurs</h3>
+                        <hr class="askcoin-l">
+                        <p>Take advantage of bringing Askcoin Dollars to parts of the world that need stability</p>
+                        <!--<p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>-->
+                    </div>
+                    <div class="col-md-4">
+                        <img src="images/askcoin.png">
+
+                        <h3>Content Creators</h3>
+                        <hr class="askcoin-l">
+                        <p>Be appreciated for the quality of your work by the people you want to reach</p>
+                        <!--<p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>-->
+                    </div>
+                    <div class="col-md-4">
+                        <img src="images/askcoin.png">
+
+                        <h3>Readers</h3>
+                        <hr class="askcoin-l">
+                        <p>Read through new posts and identify the best content to earn Askcoin Power and Askcoin
+                            Dollars</p>
+                        <!--<p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>-->
+                    </div>
+                </div>
+
+                <div class="col-sm-12 mtl">
+                    <div class="col-md-6">
+                        <img src="images/askcoin.png">
+
+                        <h3>Traders</h3>
+                        <hr class="askcoin-l">
+                        <p>Earn the spread by helping make the market between Askcoin and Askcoin Dollars on the
+                            blockchain-based decentralized exchange</p>
+                        <!--<p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>-->
+                    </div>
+                    <div class="col-md-6">
+                        <img src="images/askcoin.png">
+
+                        <h3>Social Media Sites</h3>
+                        <hr class="askcoin-l">
+                        <p>Integrate Askcoin to give your users the opportunity to earn for their posts and their time on
+                            your site</p>
+                        <!--<p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="intro-press" class="vpc" data-vp-add-class="animated fadeInUp" data-vp-remove-after-animation="true">
+    <a name="press"/>&nbsp;</a>
+    <div class="container">
+        <div class="row">
+            <h2 class="text-center">In the press</h2>
+            <hr class="askcoin">
+            <div class="col-sm-12 col-md-6 ">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                         <span class="box2">
+                           <a href="http://cointelegraph.com/news/steemit-new-social-media-platform-which-pays-you-to-post"
+                              target="_blank"><img class="img-responsive" src="images/askcoin.png"></a>
+                          </span>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                       <span class="box2">
+                        <a href="https://coinreport.net/steemit-rewards-social-media-content-creators-cryptocurrency/" target="_blank">
+                            <img class="img-responsive" src="images/askcoin.png">
+                        </a>
+                        </span>
+                    </div>
+                </div>
+                <!-- .row -->
+            </div>
+            <!-- .span6 -->
+
+            <div class="col-sm-12 col-md-6">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <span class="box2">
+                            <a href="http://www.the-blockchain.com/2016/05/03/new-blockchain-social-media-platform-steemit-pays-post-vote-online/" target="_blank">
+                                <img class="img-responsive" src="images/askcoin.png">
+                            </a>
+                        </span>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6">
+                        <span class="box2">
+                            <a href="#" target="_blank">
+                                <img class="img-responsive" src="images/askcoin.png">
+                            </a>
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<footer class="footer">
+    <div class="container">
+        <ul class="row menu nav">
+            <li class="col-xs-6 col-md-2">
+                <img style="margin-top: 12px; width:40px;" src="images/askcoin.png">
+                <p style="line-height:2rem;">
+                    &copy; 2017 Askcoin Inc.
+                </p>
+            </li>
+
+            <li class="col-xs-6 col-md-2 col-md-offset-2">
+                <h2>USING ASKCOIN</h2>
+                <ul>
+                    <li><a target="_blank" href="https://www.askcoin.com">Community App</a></li>
+                    <li><a target="_blank" href="https://askcoin.com">Block Explorer</a></li>
+                    <li><a href="/documentation/">Documentation</a></li>
+                    <li><a target="_blank" href="http://github.com/askcoin">Github</a></li>
+                </ul>
+            </li>
+
+            <div class="clearfix visible-xs-block visible-sm-block"></div>
+
+            <li class="col-xs-6 col-md-2">
+                <h2>ASKCOIN</h2>
+                <ul>
+                    <li><a href="/#intro-ex">Exchanges</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                </ul>
+            </li>
+
+            <li class="col-xs-6 col-md-2">
+                <h2>SOCIAL</h2>
+                <ul>
+                    <li><a target="_blank" href="https://askcoin.slack.com/">Slack</a></li>
+                    <li><a target="_blank" href="https://www.reddit.com/r/askcoin">Reddit</a></li>
+                    <li><a target="_blank" href="https://twitter.com/askcoin">Twitter</a></li>
+                    <li><a target="_blank" href="https://www.facebook.com/askcoin">Facebook</a></li>
+                    <li><a target="_blank" href="https://bitcointalk.org/index.php?topic=1410943.0">Bitcointalk</a></li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+</footer>
+
+<script src="js/bootstrap.js"></script>
+<script src="js/main.js"></script>
+<script src="js/salvattore.min.js"></script>
+<script src="js/animatedModal.min.js"></script>
+<script src="js/jquery.viewportchecker.js"></script>
+
+<script>
+    $("div.navbar-fixed-top").autoHidingNavbar();
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $('pre code').each(function (i, block) {
+            hljs.highlightBlock(block);
+
+        });
+        $('.vpc').viewportChecker();
+    });
+
+</script>
+</body>
+</html>
