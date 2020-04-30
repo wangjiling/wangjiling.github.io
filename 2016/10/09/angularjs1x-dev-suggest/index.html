@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>AngularJS 1.x免入坑宝典</title>
+
+  <!-- Edit site and author settings in `_config.yml` to make the social details your own -->
+
+    <meta content="WEB前端学习分享" property="og:site_name">
+  
+    <meta content="AngularJS 1.x免入坑宝典" property="og:title">
+  
+  
+    <meta content="article" property="og:type">
+  
+  
+    <meta content="AngularJS 1.x免入坑宝典" property="og:description">
+  
+  
+    <meta content="/2016/10/09/angularjs1x-dev-suggest/" property="og:url">
+  
+  
+    <meta content="2016-10-09T00:00:00+08:00" property="article:published_time">
+    <meta content="/about/" property="article:author">
+  
+  
+    <meta content="/assets/img/programer.jpeg" property="og:image">
+  
+  
+    
+  
+  
+    
+    <meta content="Programming" property="article:tag">
+    
+    <meta content="Learn" property="article:tag">
+    
+  
+
+  
+    <meta name="twitter:card" content="AngularJS 1.x免入坑宝典">
+  
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+  
+    <meta name="twitter:title" content="AngularJS 1.x免入坑宝典">
+  
+  
+    <meta name="twitter:url" content="/2016/10/09/angularjs1x-dev-suggest/">
+  
+  
+    <meta name="twitter:description" content="AngularJS 1.x免入坑宝典">
+  
+  
+    <meta name="twitter:image:src" content="/assets/img/programer.jpeg">
+  
+
+	<meta name="description" content="AngularJS 1.x免入坑宝典">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta property="og:image" content="">
+	<link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#263959">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#263959">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#263959">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=PT+Serif:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="/assets/fonts/font-awesome/css/font-awesome.min.css">
+	<!-- Styles -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <aside class="sidebar">
+  <header>
+    <div class="about">
+      <div class="cover-author-image">
+        <a href="/"><img src="/assets/img/vincent-wang.png" alt="Vincent Wang"></a>
+      </div>
+      <div class="author-name">Vincent Wang</div>
+      <p>前端开发工程师，现专注于web前端领域相关的技术开发和新技术的调研</p>
+    </div>
+  </header> <!-- End Header -->
+  <footer>
+    <section class="contact">
+      <h3 class="contact-title">Contact me</h3>
+      <ul>
+        
+          <li><a href="https://twitter.com/wangjiling" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+        
+        
+          <li><a href="https://facebook.com/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+        
+        
+          <li class="github"><a href="https://github.com/wangjiling" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+        
+          <li class="linkedin"><a href="https://in.linkedin.com/" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+        
+        
+          <li class="email"><a href="mailto:vincentwangjiling@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
+        
+      </ul>
+    </section> <!-- End Section Contact -->
+    <div class="copyright">
+      <p>2016-2019 &copy; Vincent Wang</p>
+      <p><a target="_blank" href="http://www.miitbeian.gov.cn">沪ICP备17029424号</a></p>
+    </div>
+  </footer> <!-- End Footer -->
+</aside> <!-- End Sidebar -->
+<div class="content-box clearfix">
+  <article class="article-page">
+  <div class="page-content">
+    
+    <div class="page-cover-image">
+      <img class="page-image" src=/assets/img/programer.jpeg alt="AngularJS 1.x免入坑宝典">
+    </div> <!-- End Page Cover Image -->
+    
+    <div class="wrap-content">
+      <header class="header-page">
+        <h1 class="page-title">AngularJS 1.x免入坑宝典</h1>
+        <div class="page-date"><span>2016, Oct 09&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+      </header>
+      <h3 id="前言">前言</h3>
+
+<p>在web技术发展迅速的今天，各种优秀框架（Angular、React、Vue等）层出不穷，而框架的出现和选择使用归于一点就是让开发者能更快地开发出更好的应用。本文结合项目实战经验，总结了一下AngularJS 1.x项目开发过程中最常遇到的一些问题和坑，并对一些概念和模块进行深入理解和分析，希望能给AngularJs初学者一些帮助，少走弯路，免入坑。</p>
+
+<h3 id="angularjs-简介">AngularJS 简介</h3>
+
+<p>AngularJS诞生于2009年，由Misko Hevery 等人创建，后为Google所收购。它是一款JavaScript MVVM框架，有着诸多特性，最为核心的是：MVVM、模块化、自动化双向数据绑定、语义化标签、依赖注入等。AngularJS弥补了HTML在构建应用方面的不足，使得Web开发和测试工作变得更加容易，也迅速成为了Web开发领域的新宠。</p>
+
+<h3 id="angularjs-1x中最常遇到的问题">AngularJS 1.x中最常遇到的问题</h3>
+
+<p>1、让AngularJS指令符合html5规范</p>
+
+<p>在写任何自定义属性时加上data-前缀，这是html5的一个规范。AngularJS的内部指令都是ng（ng-app、ng-model、ng-bind）为前缀的，对于想让自定义指令符合html5规范，可以直接加上data-*，而且完全不用配置，不影响功能。通过看源码可以确定AngularJS本身是支持这种写法的：</p>
+
+<p>相关源码：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+var ngAttrPrefixes = ['ng-', 'data-ng-', 'ng:', 'x-ng-'];
+
+function getNgAttribute(element, ngAttr) {
+  var attr, i, ii = ngAttrPrefixes.length;
+  for (i = 0; i &lt; ii; ++i) {
+    attr = ngAttrPrefixes[i] + ngAttr;
+    if (isString(attr = element.getAttribute(attr))) {
+      return attr;
+    }
+  }
+  return null;
+}
+
+</code></pre>
+</div>
+
+<p>所以说，ng-、data-ng-、ng:、x-ng-，都是可以生效的。</p>
+
+<p>另外，考虑到HTML对标签和属性不区分大小写，在HTML中一般推荐以小写单词加连字符的形式使用指令，而AngularJS在匹配指令的时候，会在元素或者属性的名字中剔除 x- 或者 data- 前缀，然后将 – 或者 : 连接的字符串转换成驼峰(camelCase)表现形式，然后再与注册过的指令进行匹配。</p>
+
+<p>相关源码：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+var SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.))/g;
+var MOZ_HACK_REGEXP = /^moz([A-Z])/;
+var MOUSE_EVENT_MAP= { mouseleave: "mouseout", mouseenter: "mouseover"};
+var jqLiteMinErr = minErr('jqLite');
+
+/**
+ * Converts snake_case to camelCase.
+ * Also there is special case for Moz prefix starting with upper case letter.
+ * @param name Name to normalize
+ */
+function camelCase(name) {
+  return name.
+    replace(SPECIAL_CHARS_REGEXP, function(_, separator, letter, offset) {
+      return offset ? letter.toUpperCase() : letter;
+    }).
+    replace(MOZ_HACK_REGEXP, 'Moz$1');
+}
+
+
+
+var PREFIX_REGEXP = /^((?:x|data)[\:\-_])/i;
+/**
+ * Converts all accepted directives format into proper directive name.
+ * @param name Name to normalize
+ */
+function directiveNormalize(name) {
+  return camelCase(name.replace(PREFIX_REGEXP, ''));
+}
+
+</code></pre>
+</div>
+
+<p>2、路由模块选择</p>
+
+<p>前端路由的基本原理</p>
+
+<p>哈希 #</p>
+
+<p>HTML5 中新的 history API</p>
+
+<p>路由的核心是给应用定义 “状态”</p>
+
+<p>使用路由机制会影响到应用的整体编码方式(需预先定义好状态)</p>
+
+<p>考虑兼容性问题与 “优雅降级”</p>
+
+<p>推荐使用angular-ui-router模块做前端路由，而不是用angular-route。</p>
+
+<p>区别如下：</p>
+
+<p>1、ngroute是用AngularJS框架的核心部分。</p>
+
+<p>2、ui-router是一个社区库，它是用来提高完善ngroute路由功能的。</p>
+
+<p>3、ui-router路由器允许嵌套视图(nested views)和多个命名视图(multiple named views)。这是非常有用的，你可能有很多的view来继承其他view。</p>
+
+<p>总的来说，angular-ui-router是一个功能更强大，更轻松配置项目的一个模块库，是ngRouter的升级版。</p>
+
+<p>2.1、ui-router参数传递问题</p>
+
+<p>基本参数：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+‘/user/:id’ //匹配’/user/bob’ 或’/user/1234!!!’或甚至是’/user/’ 但不是能’/user’ 或 ‘/user/bob/details’
+
+‘/user/{id}' //跟上面一样，只是将：换成{}
+
+‘/user/{id:int}' //指定param是Integer类型
+
+</code></pre>
+</div>
+
+<p>使用正则表达式：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+'/user/{id:[0-9]{1,8}}'
+
+</code></pre>
+</div>
+
+<p>匹配所有以user开始的url 并将剩余参数传给id</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+'/user/{id:.*}'
+
+'/user/*id
+
+</code></pre>
+</div>
+
+<p>多个参数：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+‘/user?id1&amp;id2'
+
+</code></pre>
+</div>
+
+<p>$StateParams service</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+// If you had a url on your state of:
+
+url: '/users/:id/details/{type}/{repeat:[0-9]+}?from&amp;to'
+
+// Then you navigated your browser to:
+
+'/users/123/details//0'
+
+
+
+// Your $stateParams object would be
+
+{ id:'123', type:'', repeat:'0' }
+
+
+
+// Then you navigated your browser to:
+
+'/users/123/details/default/0?from=there&amp;to=here'
+
+
+
+// Your $stateParams object would be
+
+{ id:'123', type:'default', repeat:'0', from:'there', to:'here' }
+
+</code></pre>
+</div>
+
+<p>$StateParams仅包含注册在当前状态下的参数，不包含其他状态下的参数，即使是上级的url参数也获取不到：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+$stateProvider.state('contacts.detail', {
+
+   url: '/contacts/:contactId',
+
+   controller: function($stateParams){
+
+      $stateParams.contactId  //*** Exists! ***//
+
+   }
+
+}).state('contacts.detail.subitem', {
+
+   url: '/item/:itemId',
+
+   controller: function($stateParams){
+
+      $stateParams.contactId //*** Watch Out! DOESN'T EXIST!! ***//
+
+      $stateParams.itemId //*** Exists! ***//
+
+   }
+
+})
+
+</code></pre>
+</div>
+
+<p>若想让下级获取到当前状态的参数，需使用resolve()。该函数会在画面渲染出来前先执行完成：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+$stateProvider.state('contacts.detail', {
+
+   url: '/contacts/:contactId',
+
+   controller: function($stateParams){
+
+      $stateParams.contactId  //*** Exists! ***//
+
+   },
+
+   resolve:{
+
+      contactId: ['$stateParams', function($stateParams){
+
+          return $stateParams.contactId;
+
+      }]
+
+   }
+
+}).state('contacts.detail.subitem', {
+
+   url: '/item/:itemId',
+
+   controller: function($stateParams, contactId){
+
+      contactId //*** Exists! ***//
+
+      $stateParams.itemId //*** Exists! ***//
+
+   }
+
+})
+
+</code></pre>
+</div>
+
+<p>2.2、 ui-sref、$state.go 的区别</p>
+
+<p>ui-sref 一般使用在 <code class="highlighter-rouge">&lt;a&gt;…&lt;/a&gt;</code>；</p>
+
+<p>$state.go(‘someState’)一般使用在 controller里面；</p>
+
+<p>从ui-sref的源码可以看到这两个本质上是一样的东西，ui-sref调用了$state.go。</p>
+
+<p>ui-sref 指令链接到特定状态</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+&lt;a ui-sref=“home"&gt;Home&lt;/a&gt;
+
+&lt;a ui-sref=“about"&gt;About&lt;/a&gt;
+
+&lt;a ui-sref=“contacts.list”&gt;Contacts&lt;/a&gt;
+
+</code></pre>
+</div>
+
+<p>$state.includes 返回 true / false，该方法可查看当前状态是否在某父状态内，比如 $state.includes(‘contacts’)返回 true / false</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+&lt;!-- 包含在 /contacts 状态内部，即其作为 parent state --&gt;
+
+&lt;li ng-class="{active: $state.includes('contacts')}"&gt;
+
+    &lt;a ui-serif=“contacts.list"&gt;Contacts&lt;/a&gt;
+
+&lt;/li&gt;
+
+</code></pre>
+</div>
+
+<p>ui-sref-active 查看当前激活状态并设置 Class</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+&lt;li ui-sref-active="active"&gt;&lt;a ui-sref=“about”&gt;About&lt;/a&gt;&lt;/li&gt;
+
+</code></pre>
+</div>
+
+<p>方便获得当前状态的方法，绑到根作用域</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+app.run(['$rootScope', '$state', '$stateParams',
+
+    function($rootScope, $state, $stateParams) {
+
+        $rootScope.$state = $state;
+
+        $rootScope.$stateParams = $stateParams;
+
+    }
+
+]);
+
+</code></pre>
+</div>
+
+<p>路由重定向 $urlRouterProvider</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+app.config(['$stateProvider', '$urlRouterProvider',
+
+function($stateProvider, $urlRouterProvider) {
+
+$urlRouterProvider
+
+// 错误的路由重定向
+
+.when('/c?id', '/contacts/:id')
+
+.when('/user/:id', '/contacts/:id')
+
+.otherwise('/');
+
+}
+
+]);
+
+</code></pre>
+</div>
+
+<p>3、目录结构</p>
+
+<p>AngularJS工程的代码目录结构通常有以下两种：</p>
+
+<p>a）传统MVC框架代码目录结构，基于文件类型将文件组合在一起：</p>
+
+<p>这样的布局，看起来挺合理. 可是当 app 变得越来越庞大的时候，这样的布局结构会导致每次都会打开一堆文件夹， 每次都要花上很多时间滑动滚动条浏览这个目录树来查找文件。</p>
+
+<p>b）根据每个文件隶属的功能模块来对文件分组, 而不是根据它隶属的层：</p>
+
+<p>对于这种代码目录结构，查找某个功能模块的文件就要容易得多, 自然可以提高开发的速度. 也许把 html 文件跟 js 文件放在混合放在一起做法不是每个人都能认同，但是起码它省下宝贵的时间。</p>
+
+<p>4、模块分组</p>
+
+<p>一开始就将主模块中所有子模块展示出来是通常的做法。但是开始做一个小应用还好，但是做大了就不好管理了：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+var app = angular.module('app',[]);
+
+app.service('MyService', function(){
+
+//service code
+
+});
+
+app.controller('MyCtrl', function($scope, MyService){
+
+//controller code
+
+});
+
+</code></pre>
+</div>
+
+<p>一个比较好的办法是子模块分组：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+var services = angular.module('services',[]);
+
+services.service('MyService', function(){
+
+//service code
+
+});
+
+var controllers = angular.module('controllers',['services']);
+
+controllers.controller('MyCtrl', function($scope, MyService){
+
+//controller code
+
+});
+
+var app = angular.module('app',['controllers', 'services']);
+
+</code></pre>
+</div>
+
+<p>或</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+var sharedServicesModule = angular.module('sharedServices',[]);
+
+sharedServices.service('NetworkService', function($http){});
+
+var loginModule = angular.module('login',['sharedServices']);
+
+loginModule.service('loginService', function(NetworkService){});
+
+loginModule.controller('loginCtrl', function($scope, loginService){});
+
+var app = angular.module('app', ['sharedServices', 'login']);
+
+</code></pre>
+</div>
+
+<p>运用要分组的思想将使工作更容易，当创建一个大的应用时，所有模块可能不会放在一页里，但是将模块根据类型进行分组将使模块的重用能力更强。</p>
+
+<p>5、依赖注入</p>
+
+<p>依赖注入是AngularJS最棒的模式之一。它使测试变得更加方便，也让它所依赖的对象变的更加清楚明白。AngularJS 对于注入是非常灵活的，一个最简单的方式只需要为模块将依赖的名字传入函数中：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+app.controller('MainCtrl', function($scope, $timeout){
+
+    $timeout(function(){
+
+        console.log($scope);
+
+}, 1000);});
+
+</code></pre>
+</div>
+
+<p>这里，很清楚的是MainCtrl依赖于$scope和$timeout。</p>
+
+<p>直到你准备投入生产并压缩你的代码。使用UglifyJS，上面的例子会变成：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+app.controller("MainCtrl",function(e,t){t(function(){console.log(e)},1e3)})
+
+</code></pre>
+</div>
+
+<p>现在AngularJS怎么知道MainCtrl依赖什么？AngularJS提供了一个非常简单的解决方案：把依赖作为一个字符串数组传递，而数组的最后一个元素是一个把所有依赖作为参数的函数。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+app.controller('MainCtrl', ['$scope', '$timeout', function($scope, $timeout){
+
+    $timeout(function(){
+
+        console.log($scope);
+
+}, 1000);}]);
+
+</code></pre>
+</div>
+
+<p>接下来在压缩的代码中AngularJS也可以知道如何找到依赖：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+app.controller("MainCtrl",["$scope","$timeout",function(e,t){t(function(){console.log(e)},1e3)}])
+
+</code></pre>
+</div>
+
+<p>5.1、全局依赖</p>
+
+<p>通常在写AngularJS应用时会有一个对象作为依赖绑定到全局作用域中。这意味着它在任何AngularJS的代码中都可用，但这打破了依赖注入模型同时带来一些问题，特别是在测试中。</p>
+
+<p>AngularJS把这些全局变量封装到模块中，这样它们可以像标准AngularJS模块一样被注入。</p>
+
+<p>Underscore.js是很棒的库，它把Javascript代码简化成了函数模式，并且它可以被转化成一个模块：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+var underscore = angular.module('underscore', []);underscore.factory('_', function() {
+
+  return window._; //Underscore must already be loaded on the page
+
+});
+
+var app = angular.module('app', ['underscore']);
+
+app.controller('MainCtrl', ['$scope', '_', function($scope, _) {
+
+    init = function() {
+
+          _.keys($scope);
+
+      }
+
+      init();
+
+}]);
+
+</code></pre>
+</div>
+
+<p>它允许应用继续用AngularJS依赖注入的风格，也让underscore在测试的时候被交换出来，这或许看上去不重要，像是一个无关紧要的工作，但如果你的代码正在使用use strict（应该使用），那么这就变得有必要了。</p>
+
+<p>6、控制器膨胀</p>
+
+<p>控制器是AngularJS应用中的肉和番茄。它很简单，特别是开始的时候，在控制器中放入过多的逻辑。控制器不应该做任何DOM操作或者有DOM选择器，这应该由使用ngModel的指令（directives）做的事。同样地，业务逻辑应该在服务（services）中，而不是 控制器。</p>
+
+<p>数据也应该被存在服务（services）中，除非它已经和$scope关联。服务（services）是留存于整个应用生命周期的个体，同时控制器在应用各阶段间都是暂态的。如果数据被存在控制器中，那么当它被重新实例化的时候，就需要从其他地方抓取。即使数据被存储在localStorage中，获取数据也要比从Javascript变量中获取要慢几个数量级。</p>
+
+<p>AngularJS在遵从简单责任原则（SRP）时工作地最好。如果控制器是视图和模型的协调者，那么它拥有的逻辑应该被最小化。这将使得测试变的更加简单。</p>
+
+<p>7、Service和Factory的区别</p>
+
+<p>几乎每一个刚接触AngularJS的开发者，都会对这两个东西产生困惑。 虽然它们（几乎）实现了同样的效果，但真的不是语法糖。</p>
+
+<p>这里是它们在 AngularJS 源码中的定义:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+function factory(name, factoryFn, enforce) {
+  return provider(name, {
+    $get: enforce !== false ? enforceReturnValue(name, factoryFn) : factoryFn
+  });
+}
+
+function service(name, constructor) {
+  return factory(name, ['$injector', function($injector) {
+    return $injector.instantiate(constructor);
+  }]);
+}
+
+</code></pre>
+</div>
+
+<p>从源码上看显然 service 函数只是调用 factory 函数，然后 factory 函数再调用 provider 函数。事实上，value、constant和decorator 也是 AngularJS 提供的对 provider 的封装，但对它们使用场景不会有这种困惑，并且文档描述也非常清晰。</p>
+
+<p>那么Service 仅仅是单纯的调用了一次 factory 函数吗？ 重点在 $injector.instantiate 中; 在这个函数里service会接收一个由$injector 使用new关键字去实例化的一个构造器对象。这个service 的构造函数只在声明时被实例化一次，并且在这个 factory 对象每次被注入时各种互相引用， 但这个 factory还是只是被实例化了一次。 另外，所有的 providers 都是单例的。</p>
+
+<p>既然都完成同样的功能，为什么会有这两种格式存在？factory比service略微更灵活一些，因为它们可以使用new关键字返回函数；从面向对象编程的工厂模式来说，一个factory可以是一个用于创建其他对象的对象。</p>
+
+<p>在刚入门时候最好只使用services.</p>
+
+<p>Factory更加适用于当你在设计一个需要私有方法的类的时候使用：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+app.factory('privateFactory', function(){
+
+    var privateFunc = function(name) {
+
+        return name.split("").reverse().join(""); //reverses the name
+
+    };
+
+
+
+    return {
+
+        hello: function(name){
+
+          return "Hello " + privateFunc(name);
+
+        }
+
+    };});
+
+</code></pre>
+</div>
+
+<p>在这个例子中privateFactory含有一个不能被外部访问的私有privateFunc函数。这种使用方式services也可以实现，但是使用Factory代码结构显得更加清晰。</p>
+
+<p>8、审视$scope</p>
+
+<p>在AngularJS中每一个$scope都从它的父$scope继承过来，最高层是$rootScope。（$scope在指令中表现的有些不同，指令中的隔离作用域仅继承那些显式声明的属性。）</p>
+
+<p>从父级那里分享数据对于原型继承来说并不重要，不过如果不小心的话，会遮蔽父级$scope的属性。</p>
+
+<p>我们想在导航栏上呈现一个用户名，然后进入登陆表单。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+&lt;div ng-controller="navCtrl"&gt;
+
+   &lt;span&gt;&lt;/span&gt;
+
+   &lt;div ng-controller="loginCtrl"&gt;
+
+        &lt;span&gt;&lt;/span&gt;
+
+        &lt;input ng-model="user"&gt;&lt;/input&gt;
+
+   &lt;/div&gt;&lt;/div&gt;
+
+</code></pre>
+</div>
+
+<p>考你下：当用户在设置了ngModel的文本框中输入了值，哪个模板会被更新？是navCtrl，loginCtrl还是两者？</p>
+
+<p>如果你选loginCtrl，那么你可能对原型继承的机理比较了解了。当寻找字面值时，原型链并没有被涉及。如果navCtrl要被更新的话，那么查找原型链是必要的。当一个值是对象的时候就会发生这些。（记住在Javascript中，函数、数组合对象都算作对象）</p>
+
+<p>所以想要获得期望的效果就需要在navCtrl上创建一个对象可以被loginCtrl引用。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+&lt;div ng-controller="navCtrl"&gt;
+
+   &lt;span&gt;&lt;/span&gt;
+
+   &lt;div ng-controller="loginCtrl"&gt;
+
+        &lt;span&gt;&lt;/span&gt;
+
+        &lt;input ng-model="user.name"&gt;&lt;/input&gt;
+
+   &lt;/div&gt;&lt;/div&gt;
+
+</code></pre>
+</div>
+
+<p>现在既然user是一个对象了，原型链会被考虑进去，navCtrl的模板和$scope也会随着loginCtrl更新。这可能看上去像一个设计好的例子，但当涉及到像ngRepeat那样会创建子$scope的时候问题就会出现。</p>
+
+<p>9、jQuery的使用</p>
+
+<p>jQuery 是个很不错的类库，它将跨平台开发标准化，在现代网页开发中具有很重要的地位。虽然 jQuery 拥有许多强大的功能，但是他的设计理念却与 AngularJS 大相径庭。</p>
+
+<p>AngularJS 是用来开发应用框架的; jQuery 则是一个用来简化 HTML 文档对象遍历和操作, 事件处理, 动画以及 Ajax 使用的类库而已，这是它们俩在本质上的区别。AngularJS 侧重点在于应用的架构, 而非仅仅是补充 HTML 网页的功能。</p>
+
+<p>如文档所述 AngularJS 可以让你根据应用的需要对 HTML 进一步扩展。所以, 如果想要深入的了解 AngularJS 应用开发, 就不应该再继续抱着 jQuery 的大腿， jQuery 只会把程序员的思维方式限制在现有的 HTML 标准里头。</p>
+
+<p>Angular并不依赖jQuery，事实上，Angular源码里包含了一个内嵌的轻量级的jquery:jqLite. 当Angular检测到你的页面里有jQuery出现，它就会用这个jQuery而不再用jqLite。手册上这么写的：</p>
+
+<p>Angular中所有的元素引用都会被jQuery或者jqLite包装；他们永远不是纯DOM引用</p>
+
+<p>所以Angular如果没有检测到jQuery，那么就会使用jqLite元素。</p>
+
+<p>DOM操作应该出现在指令中，但这并不意味着一定要使用jQuery包装集。在使用jQuery前要考虑到一些功能AngularJS已经提供了。随着功能复杂度增加，虽然总有一天，使用jQuery库是必要的，但是从一开始就引入它无疑是一个错误。</p>
+
+<p>10、UI的闪烁</p>
+
+<p>Angular的自动数据绑定功能是亮点，然而，在Angular初始化之前，页面中可能会给用户呈现出没有解析的表达式。当DOM准备就绪，Angular计算并替换相应的值，这样就会导致出现一个丑陋的闪烁效果。</p>
+
+<p>如果你做的是SPA(Single Page Application)，这个问题只会在第一次加载页面的时候出现，以下有几种方法可以解决这个问题：</p>
+
+<p>a）放弃 {{ }} 表达式，改用ng-bind或ng-bind-template指令：</p>
+
+<p>ng-bind 指令告诉 AngularJS 使用给定的变量或表达式的值来替换 HTML 元素的内容;</p>
+
+<p>ng-bind-template 指令用于告诉 AngularJS 将给定表达式的值替换 HTML 元素的内容;</p>
+
+<p>b）另外一种方法就是完全隐藏元素，甚至可以隐藏整个应用，直到Angular就绪。Angular为此还提供了ng-cloak指令，只需要在需要的地方加上ng-cloak。</p>
+
+<p>工作原理：</p>
+
+<p>Angular会在初始化的时候在DOM的heade增加一行css代码，如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+&lt;style type="text/css"&gt;@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}&lt;/style&gt;
+
+</code></pre>
+</div>
+
+<p>我们可以看见Angular将带有ng-cloak的元素设置为display:none，隐藏掉。ng-cloak是一个directive，在等到Angular解析到带有ng-cloak的节点时候，会把attribute和class同时remove掉，这样就可以实现防止节点的闪烁。源码如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+var ngCloakDirective = ngDirective({
+
+  compile: function(element, attr) {
+
+    attr.$set('ngCloak', undefined);
+
+    element.removeClass('ng-cloak');
+
+  }
+
+});
+
+</code></pre>
+</div>
+
+<p>到这里理论上通过ng-cloak可以完美解决闪烁问题，但是如果浏览器加载DOM的速度比Angular在head中加入css的速度还快呢？只能使出必杀技，自己把css加入到heade，这样就可以完美解决了。</p>
+
+<p>11、Directive永远不会’完成’</p>
+
+<p>在directive中，一个令人掉头发的事就是directive已经‘完成’，但你永远不会知道。当把jQuery插件整合到directive里时，这个通知尤为重要。假设你想用ng-repeat把动态数据以jQuery datatable的形式显示出来。当所有的数据在页面中加载完成后，你只需要调用$(‘.mytable).dataTable()就可以了。 但是，很难做到，因为Angular的数据绑定是通过持续的digest循环实现的，基于此，Angular框架里根本没有一个时间是‘休息’的。 一个解决方法就是将jQuery dataTable的调用放在当前digest循环外，用timeout方法就可以做到。在指令的link方法中实现如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+      link : function(scope, element, attrs, ctrl) {
+
+         scope.datas = [1,2,3];
+
+         // this work
+
+         $timeout(function() {
+
+           $(“.mytable”;, element).dataTable();
+
+         }, 0)
+
+      }
+
+</code></pre>
+</div>
+
+<h3 id="总结">总结</h3>
+
+<p>AngularJS 1.x是一个很不错的框架，并且和它的社区一起发展着，是当今最受欢迎的JS框架之一。希望以上这些问题和坑可以被避免，不正确之处望斧正，谢谢。</p>
+
+      <div class="page-footer">
+        <div class="page-share">
+          <a href="https://twitter.com/intent/tweet?text=AngularJS 1.x免入坑宝典&url=/2016/10/09/angularjs1x-dev-suggest/" title="Share on Twitter" rel="nofollow" target="_blank">Twitter</a>
+          <a href="https://facebook.com/sharer.php?u=/2016/10/09/angularjs1x-dev-suggest/" title="Share on Facebook" rel="nofollow" target="_blank">Facebook</a>
+          <a href="https://plus.google.com/share?url=/2016/10/09/angularjs1x-dev-suggest/" title="Share on Google+" rel="nofollow" target="_blank">Google+</a>
+        </div>
+        <div class="page-tag">
+          
+            <a href="/tags#Programming" class="tag">&#35; Programming</a>
+          
+            <a href="/tags#Learn" class="tag">&#35; Learn</a>
+          
+        </div>
+      </div>
+      <section class="comment-area">
+  <!--PC和WAP自适应版-->
+  <div id="SOHUCS" sid="/2016/10/09/angularjs1x-dev-suggest" ></div>
+  <script type="text/javascript">
+      (function(){
+          var appid = 'cytqkAhNv';
+          var conf = 'prod_6e8ce9f2b9b375457313cf45a53ca895';
+          var width = window.innerWidth || document.documentElement.clientWidth;
+          if (width < 960) {
+              window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("http://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+</section>
+
+    </div> <!-- End Wrap Content -->
+  </div> <!-- End Page Content -->
+</article> <!-- End Article Page -->
+
+</div>
+
+  </div>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111688204-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-111688204-1');
+</script>
+
+<!-- baidu -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?4203e28ed2486071d9be8be5ac2e99cd";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+</body>
+</html>

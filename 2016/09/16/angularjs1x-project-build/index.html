@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>AngularJS 1.x 项目构建</title>
+
+  <!-- Edit site and author settings in `_config.yml` to make the social details your own -->
+
+    <meta content="WEB前端学习分享" property="og:site_name">
+  
+    <meta content="AngularJS 1.x 项目构建" property="og:title">
+  
+  
+    <meta content="article" property="og:type">
+  
+  
+    <meta content="AngularJS 1.x 项目构建" property="og:description">
+  
+  
+    <meta content="/2016/09/16/angularjs1x-project-build/" property="og:url">
+  
+  
+    <meta content="2016-09-16T00:00:00+08:00" property="article:published_time">
+    <meta content="/about/" property="article:author">
+  
+  
+    <meta content="/assets/img/programer.jpeg" property="og:image">
+  
+  
+    
+  
+  
+    
+    <meta content="Programming" property="article:tag">
+    
+    <meta content="Learn" property="article:tag">
+    
+  
+
+  
+    <meta name="twitter:card" content="AngularJS 1.x 项目构建">
+  
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+  
+    <meta name="twitter:title" content="AngularJS 1.x 项目构建">
+  
+  
+    <meta name="twitter:url" content="/2016/09/16/angularjs1x-project-build/">
+  
+  
+    <meta name="twitter:description" content="AngularJS 1.x 项目构建">
+  
+  
+    <meta name="twitter:image:src" content="/assets/img/programer.jpeg">
+  
+
+	<meta name="description" content="AngularJS 1.x 项目构建">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta property="og:image" content="">
+	<link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#263959">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#263959">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#263959">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=PT+Serif:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="/assets/fonts/font-awesome/css/font-awesome.min.css">
+	<!-- Styles -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <aside class="sidebar">
+  <header>
+    <div class="about">
+      <div class="cover-author-image">
+        <a href="/"><img src="/assets/img/vincent-wang.png" alt="Vincent Wang"></a>
+      </div>
+      <div class="author-name">Vincent Wang</div>
+      <p>前端开发工程师，现专注于web前端领域相关的技术开发和新技术的调研</p>
+    </div>
+  </header> <!-- End Header -->
+  <footer>
+    <section class="contact">
+      <h3 class="contact-title">Contact me</h3>
+      <ul>
+        
+          <li><a href="https://twitter.com/wangjiling" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+        
+        
+          <li><a href="https://facebook.com/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+        
+        
+          <li class="github"><a href="https://github.com/wangjiling" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+        
+          <li class="linkedin"><a href="https://in.linkedin.com/" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+        
+        
+          <li class="email"><a href="mailto:vincentwangjiling@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
+        
+      </ul>
+    </section> <!-- End Section Contact -->
+    <div class="copyright">
+      <p>2016-2019 &copy; Vincent Wang</p>
+      <p><a target="_blank" href="http://www.miitbeian.gov.cn">沪ICP备17029424号</a></p>
+    </div>
+  </footer> <!-- End Footer -->
+</aside> <!-- End Sidebar -->
+<div class="content-box clearfix">
+  <article class="article-page">
+  <div class="page-content">
+    
+    <div class="page-cover-image">
+      <img class="page-image" src=/assets/img/programer.jpeg alt="AngularJS 1.x 项目构建">
+    </div> <!-- End Page Cover Image -->
+    
+    <div class="wrap-content">
+      <header class="header-page">
+        <h1 class="page-title">AngularJS 1.x 项目构建</h1>
+        <div class="page-date"><span>2016, Sep 16&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+      </header>
+      <h3 id="前言">前言</h3>
+
+<p>为了能在项目庞大的时候进行有效的维护和降低每一次迭代开发的成本，需要我们在项目开始时搭建一个较为合理的架构，之后随着项目开发再慢慢完善。一套搭的比较完善的架子有两个最为突出的特性：其一就是结构清晰维护方便；另一个就是开发效率极高，大量的内容被抽象出来，做成公共的组件，只要实现业务部分即可。</p>
+
+<h3 id="构建angularjs项目">构建AngularJS项目</h3>
+
+<p>Angular项目框架结构图：</p>
+
+<p><img src="/assets/img/angularjs1x-project-build/angular1x-structure.jpeg" alt="angular1x-structure" /></p>
+
+<p>构建Angular项目的方式有两种：</p>
+
+<p>1)手工</p>
+
+<p>手工构建项目是我们平时用的最多的一种方式，自己建目录，下载类库，写html、js、css文件，自己实现引用关系。</p>
+
+<p>2)Yeoman</p>
+
+<p>Yeoman是一个用于构建现代webapp的web脚手架工具，它旨在为开发者提供一系列健壮的工具、程序库和工作流，帮助他们快速构建出漂亮、引人注目的Web应用。它不只是一个工具，还是一个工作流。它其实包括了三个部分yo、grunt（或gulp）、bower（或npm），分别用于项目的启动、文件操作、包管理。</p>
+
+<p>Yo（脚手架工具）: Yo是一个项目初始化工具，可以生成一套启动某类项目必需的项目文件。</p>
+
+<p>npm、Bower（包管理器）： 一个客户端技术的软件包管理器，它可用于搜索、安装和卸载如JavaScript、HTML、CSS之类的网络资源。</p>
+
+<p>Grunt、Gulp（构建工具）： 是基于JavaScript的命令行构建工具，它可以帮助开发者们自动化重复性的工作。</p>
+
+<p>这三种工具是分别独立开发的，但是需要配合使用，来实现我们高效的工作流模式。</p>
+
+<p>一、手工构建</p>
+
+<p>下面通过一个简单的Demo来演示如何手工创建一个 Angular 1.x 项目，Demo代码地址：https://github.com/wangjiling/angular_1，Demo还有很多需要完善和优化的地方，仅供参考。</p>
+
+<p>1、创建目录结构</p>
+
+<p>一般目录结构有两种，folder by type和folder by feature，使用哪种目录结构和如何使用要根据具体的项目而定，没有绝对的好与坏，当然，也可以两种目录结构混合使用。</p>
+
+<p>在创建文件目录之前，首先要确定选择使用什么框架和哪些前端技术去实现项目，然后根据需要再去创建相应的目录和文件。Demo使用svg为主要图片格式、less为css的预处理语言，gulp为构建工具，bower为包管理器，依赖node+npm环境。基于此，手动创建的代码目录结构如下图所示：</p>
+
+<p><img src="/assets/img/angularjs1x-project-build/angular1x-code.png" alt="angular1x-code" /></p>
+
+<p>上面的文件目录结构很清晰，文件结构是按照类型来划分的。以下是项目配置文件的简单说明：</p>
+
+<p>js目录下的app.js和app.router.js：分别是angular的模块依赖和路由配置文件；</p>
+
+<p>package.json：npm的包依赖配置文件，主要是gulp相关的工具包；</p>
+
+<p>bower.json和bowerrc ：bower.json是bower的包依赖配置文件；.bowerrc文件里面配置一下bower的一些默认行为，比如你可以决定让安装的包放到哪个目录的下面，把包发布到的位置，bower使用的临时目录，使用的代理等；</p>
+
+<p>gulpfile.js和gulp.config.js：gulpfile.js为构建工具gulp的任务配置文件；gulp.config.js为gulp任务所需要的目录配置文件；</p>
+
+<p>.gitignore：用来配置不需要加到git版本库的文件。</p>
+
+<p>以上每个配置文件的具体内容请自行查阅代码。</p>
+
+<p>2、通过bower添加模块</p>
+
+<p>使用Angular框架需要引入相应的模块，通过bower添加：</p>
+
+<p>bower install angular angular-bootstrap angular-ui-router bootstrap –save</p>
+
+<p>模块依赖会自动加到bower.json里，以后从仓库拉取项目代码后只需要执行 bower install 即可。</p>
+
+<p>3、gulp构建</p>
+
+<p>选择合适的gulp模块进行代码的合并、压缩，图片优化，编译预处理代码等，通过npm添加，e.g.：</p>
+
+<p>npm install gulp-less –save-dev</p>
+
+<p>模块依赖会自动加到package.json里，以后从仓库拉取项目代码后只需要执行 npm install 即可。</p>
+
+<p>gulpfile.js里面定义了一系列任务，其中有default和build两个任务：</p>
+
+<p>default：用于开发环境，开发时执行该任务，会编译less和合并svg图片，并实时监听less文件和svg文件，有变动时会重新执行less编译、svg图片合并；命令： gulp（或gulp default） ；</p>
+
+<p>build：用于生产环境，上线前执行该任务，会进行代码的合并、压缩、添加版本号等一系列操作，生成上线代码到build文件夹下；</p>
+
+<p>4、本地浏览器查看项目应用</p>
+
+<p>安装anywhere模块：npm install -g anywhere //anywhere非常方便地启动一个node服务器，并将当前目录变成一个静态文件服务器的根目录</p>
+
+<p>开发环境：执行命令 gulp &amp;&amp; cd app &amp;&amp; anywhere 8000</p>
+
+<p>开发环境：执行命令 gulp build &amp;&amp; cd build &amp;&amp; anywhere 9000</p>
+
+<p>当然你也可以通过gulp把上面两个操作写成任务，通过任务启动。</p>
+
+<p>二、Yeoman构建</p>
+
+<p>比较好用的基于Yeoman的Angular项目生成器：</p>
+
+<p>generator-angular：这种生成器生成的文件结构是按照类型来划分的，就是controller放在一起，service放在一起，directive放在一起，route文件只有一个。这种结构适合不是很大的项目，一旦项目大了起来使用这种方式就使项目变得不太容易维护。</p>
+
+<p>generator-hottowel：这种生成器生成的文件结构是按照模块功能来划分的，举个例子，你的项目中可能有许多模块，可能是user模块，home模块等等；每个模块都包含下面这几种文件：module，controller，route，service等；module用来声明这个模块，route是这个模块的路由文件，service是这个模块的服务。</p>
+
+<p>generator-angularfire：Yeoman generator for AngularJS + Firebase (and AngularFire) - lets you quickly set up a project with sensible defaults and best practices .</p>
+
+<p>可以到github上通过各个仓库的readme.md查看其用法，下面选择使用generator-angular（using generator-angular 0.15.1）来构建一个Angular项目，如下：</p>
+
+<p>1、构建过程</p>
+
+<p>a)安装nodejs、npm</p>
+
+<p>b)通过npm安装以下全局模块：</p>
+
+<p>npm install -g grunt-cli gulp-cli bower yo generator-karma generator-angular //安装两个构建工具供选择；generator-angular依赖generator-karma</p>
+
+<p>c)创建项目</p>
+
+<p>新建项目文件夹：mkdir myapp-angular &amp;&amp; cd myapp-angular</p>
+
+<p>生成项目：yo angular myapp-angular //根据提示选择要使用的模块，接着开始生成项目文件，并自动执行bower install &amp;&amp; npm install（如果失败，自己再执行一遍这条命令）下载依赖包。</p>
+
+<p>自动化添加文件：generator-angular本身有一系列可用的生成器，通过yo可以自动添加view、controller、directive、filter、route、service、factory等。</p>
+
+<p>d)目录结构</p>
+
+<p>打开myapp-angular目录，会看到下面的文件结构：</p>
+
+<p>app/：Web应用的父级目录。</p>
+
+<p>index.html： Angular应用的主HTML文件（base html file）</p>
+
+<p>404.html、favicon.ico和robots.txt：通用的Web文件，Yeoman已经将它创建出来了，你不需要再手动去创建</p>
+
+<p>bower_components：存放项目相关的JavaScript或Web依赖，由bower安装的</p>
+
+<p>scripts：JS文件</p>
+
+<p>app.js：主程序</p>
+
+<p>controllers：Angular控制器</p>
+
+<p>styles：CSS文件</p>
+
+<p>views：Angular模板</p>
+
+<p>gruntfile.js（gulpfile.js）、package.json 以及node_modules：构建工具Grunt（gulp）需要使用的配置以及依赖。</p>
+
+<p>test/：测试框架以及针对这个项目的单元测试，包括了为控制器写的样板测试（boilerplate tests）。</p>
+
+<p>2、构建工具的使用</p>
+
+<p>在浏览器中查看应用：grunt serve（gulp serve）</p>
+
+<p>运行命令后本地会启动一个基于node.js的web服务器，通过浏览器访问http://localhost:9000/ 就可以看到应用，同时会监听工程目录下的文件的改变，一旦文件发生改变会重新编译文件，自动刷新应用。</p>
+
+<p>上线：grunt（gulp）</p>
+
+<p>运行命令后会进行代码的合并、压缩，图片优化，编译预处理代码等，打包后的代码会放在dist文件夹下，通过命令 grunt serve:prod（grunt serve:prod） 可在浏览器中查看打包后要上线的应用。</p>
+
+<p>3、通过bower安装使用其他模块</p>
+
+<p>默认情况下generator会通过bower安装一些依赖的模块，其他的依赖模块和第三方库应尽可能通过bower去安装，以便于管理和更新。另外提一下Angular 1.3不在支持IE8，json3和es5-shim已经从bower中移除；如果需要，执行：bower install –save json3 es5-shim即可。</p>
+
+<p>三、Angular UI框架或者库</p>
+
+<p>Angular项目框架结构搭建好之后，开始进行具体的功能开发，以下是具体项目中常用到的一些库或框架（当然，你也可以自己实现Angular插件）：</p>
+
+<p>Ionic：相当不错的移动应用UI框架，它自己本身就有着很出色的表现，配合Angular以及ngCordova，再加上firebase可以快速的打造一个hybrid mobile app。</p>
+
+<p>Angular Material：符合material规范的使用Angular实现的一个前端框架，效果相当不错。</p>
+
+<p>AngularStrap：一些结合Bootstrap 3的指令，帮助你更快的打造你的应用。</p>
+
+<p>AngularUI：一个关于Angular的超大豪华套餐，其中的UI Router、UI Bootstrap、UI Select是常用模块；</p>
+
+<p>ngDialog 非常不错的弹出窗插件，很轻量，但是功能却很强大；</p>
+
+<p>ng-file-upload 一个上传文件的组件；</p>
+
+<p>angular-toastr 非常不错的消息提示插件；</p>
+
+<p>两个编写Angular的代码规范：</p>
+
+<p>https://github.com/johnpapa/angular-styleguide</p>
+
+<p>https://github.com/toddmotto/angular-styleguide</p>
+
+<h3 id="总结">总结</h3>
+
+<p>上面构建Angular项目的两种方式各有优缺点，手工构建优点是自由度更高，但需要开发者具有一定的项目开发经验，能熟练使用各种web前端技术，并对Angular有比较深入的理解；而Yeoman可以通过生成器快速生成一个健壮、完善的项目框架，缺点是生成的项目配置文件比较复杂，难以理解，开发者还要先掌握Yeoman相关的技术知识。</p>
+
+      <div class="page-footer">
+        <div class="page-share">
+          <a href="https://twitter.com/intent/tweet?text=AngularJS 1.x 项目构建&url=/2016/09/16/angularjs1x-project-build/" title="Share on Twitter" rel="nofollow" target="_blank">Twitter</a>
+          <a href="https://facebook.com/sharer.php?u=/2016/09/16/angularjs1x-project-build/" title="Share on Facebook" rel="nofollow" target="_blank">Facebook</a>
+          <a href="https://plus.google.com/share?url=/2016/09/16/angularjs1x-project-build/" title="Share on Google+" rel="nofollow" target="_blank">Google+</a>
+        </div>
+        <div class="page-tag">
+          
+            <a href="/tags#Programming" class="tag">&#35; Programming</a>
+          
+            <a href="/tags#Learn" class="tag">&#35; Learn</a>
+          
+        </div>
+      </div>
+      <section class="comment-area">
+  <!--PC和WAP自适应版-->
+  <div id="SOHUCS" sid="/2016/09/16/angularjs1x-project-build" ></div>
+  <script type="text/javascript">
+      (function(){
+          var appid = 'cytqkAhNv';
+          var conf = 'prod_6e8ce9f2b9b375457313cf45a53ca895';
+          var width = window.innerWidth || document.documentElement.clientWidth;
+          if (width < 960) {
+              window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("http://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+</section>
+
+    </div> <!-- End Wrap Content -->
+  </div> <!-- End Page Content -->
+</article> <!-- End Article Page -->
+
+</div>
+
+  </div>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111688204-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-111688204-1');
+</script>
+
+<!-- baidu -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?4203e28ed2486071d9be8be5ac2e99cd";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+</body>
+</html>

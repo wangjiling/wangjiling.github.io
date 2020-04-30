@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>iframe高度自适应</title>
+
+  <!-- Edit site and author settings in `_config.yml` to make the social details your own -->
+
+    <meta content="WEB前端学习分享" property="og:site_name">
+  
+    <meta content="iframe高度自适应" property="og:title">
+  
+  
+    <meta content="article" property="og:type">
+  
+  
+    <meta content="iframe高度自适应" property="og:description">
+  
+  
+    <meta content="/2016/12/12/js-iframe-height-adaptive/" property="og:url">
+  
+  
+    <meta content="2016-12-12T00:00:00+08:00" property="article:published_time">
+    <meta content="/about/" property="article:author">
+  
+  
+    <meta content="/assets/img/web-dev.jpeg" property="og:image">
+  
+  
+    
+  
+  
+    
+    <meta content="Programming" property="article:tag">
+    
+    <meta content="Learn" property="article:tag">
+    
+  
+
+  
+    <meta name="twitter:card" content="iframe高度自适应">
+  
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+  
+    <meta name="twitter:title" content="iframe高度自适应">
+  
+  
+    <meta name="twitter:url" content="/2016/12/12/js-iframe-height-adaptive/">
+  
+  
+    <meta name="twitter:description" content="iframe高度自适应">
+  
+  
+    <meta name="twitter:image:src" content="/assets/img/web-dev.jpeg">
+  
+
+	<meta name="description" content="iframe高度自适应">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta property="og:image" content="">
+	<link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#263959">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#263959">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#263959">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=PT+Serif:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="/assets/fonts/font-awesome/css/font-awesome.min.css">
+	<!-- Styles -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <aside class="sidebar">
+  <header>
+    <div class="about">
+      <div class="cover-author-image">
+        <a href="/"><img src="/assets/img/vincent-wang.png" alt="Vincent Wang"></a>
+      </div>
+      <div class="author-name">Vincent Wang</div>
+      <p>前端开发工程师，现专注于web前端领域相关的技术开发和新技术的调研</p>
+    </div>
+  </header> <!-- End Header -->
+  <footer>
+    <section class="contact">
+      <h3 class="contact-title">Contact me</h3>
+      <ul>
+        
+          <li><a href="https://twitter.com/wangjiling" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+        
+        
+          <li><a href="https://facebook.com/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+        
+        
+          <li class="github"><a href="https://github.com/wangjiling" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+        
+          <li class="linkedin"><a href="https://in.linkedin.com/" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+        
+        
+          <li class="email"><a href="mailto:vincentwangjiling@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
+        
+      </ul>
+    </section> <!-- End Section Contact -->
+    <div class="copyright">
+      <p>2016-2019 &copy; Vincent Wang</p>
+      <p><a target="_blank" href="http://www.miitbeian.gov.cn">沪ICP备17029424号</a></p>
+    </div>
+  </footer> <!-- End Footer -->
+</aside> <!-- End Sidebar -->
+<div class="content-box clearfix">
+  <article class="article-page">
+  <div class="page-content">
+    
+    <div class="page-cover-image">
+      <img class="page-image" src=/assets/img/web-dev.jpeg alt="iframe高度自适应">
+    </div> <!-- End Page Cover Image -->
+    
+    <div class="wrap-content">
+      <header class="header-page">
+        <h1 class="page-title">iframe高度自适应</h1>
+        <div class="page-date"><span>2016, Dec 12&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+      </header>
+      <h3 id="引言">引言</h3>
+
+<p>iframe高度自适应，其实就是设置iframe的高度，使其等于内嵌网页的高度，从而看不出来滚动条和嵌套痕迹，对于用户体验和网站美观起着重要作用。如果内容是固定的，那么我们可以通过CSS来给它直接定义一个高度达到效果，但当内容是未知或者是变化的时候，这个时候有以下几种情况。</p>
+
+<h3 id="一传统方式">一、传统方式</h3>
+
+<p>1、同域下父页面内的js能获取到iframe页面的高度，所以在iframe加载完后获取下高度就行了。常用的兼容代码有：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+    function setIframeHeight(iframe){
+
+        var subWeb = iframe.contentDocument ? iframe.contentDocument : iframe.contentWindow.document;
+
+        if (iframe &amp;&amp; subWeb) {
+
+            iframe.height = subWeb.body.clientHeight || subWeb.body.offsetHeight || subWeb.body.scrollHeight;
+
+            iframe.width = subWeb.body.scrollWidth || subWeb.body.offsetWidth || subWeb.body.scrollWidth;
+
+        }
+
+    }
+
+    document.getElementById('xxx_iframe').onload = function () {
+
+        setIframeHeight(this);
+
+    };
+
+</code></pre>
+</div>
+
+<p>2、如果在同个顶级域名、不同子域名页面之间，可以设置domain为相同的顶级域名：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+    document.domain=“xxx.com”;
+
+</code></pre>
+</div>
+
+<p>3、跨域下的iframe自适应高度</p>
+
+<p>跨域的时候，由于js的同源策略，父页面内的js不能获取到iframe页面的高度，需要一个页面来做代理。</p>
+
+<p>方法如下：假设www.vincent1.com下的一个页面a.html要包含www.vincent2.com下的一个页面b.html。</p>
+
+<p>我们使用www.vincent1.com下的另一个页面agent.html来做代理，通过它获取iframe页面的高度，并设定iframe元素的高度。</p>
+
+<p>a.html中包含iframe:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+&lt;iframe src="http://www.vincent2.com:3000/cross-domain/b.html" id="a_iframe" frameborder="0"&gt;&lt;/iframe&gt;
+
+</code></pre>
+</div>
+
+<p>在b.html中加入如下代码：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+&lt;iframe id="agent_iframe"  height="0" width="0"  src="http://www.vincent1.com:3000/cross-domain/agent.html" style="display:none" &gt;&lt;/iframe&gt;
+
+
+
+&lt;script type="text/javascript"&gt;
+
+    (function autoHeight(){
+
+        var b_width = document.body.clientWidth || document.body.offsetWidth || document.body.scrollWidth;
+
+        var b_height = document.body.clientHeight || document.body.offsetHeight || document.body.scrollHeight;
+
+        var c_iframe = document.getElementById("agent_iframe");
+
+        c_iframe.src = c_iframe.src + "#" + b_width + "|" + b_height;  // 这里通过hash传递b.html的宽高
+
+    })();
+
+&lt;/script&gt;
+
+</code></pre>
+</div>
+
+<p>最后，agent.html中放入一段js:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+&lt;script type="text/javascript"&gt;
+
+    var b_iframe = window.parent.parent.document.getElementById("a_iframe");
+
+    var hash_url = window.location.hash;
+
+    if(hash_url.indexOf("#")&gt;=0){
+
+        var hash_width = hash_url.split("#")[1].split("|")[0]+"px";
+
+        var hash_height = hash_url.split("#")[1].split("|")[1]+"px";
+
+        b_iframe.style.width = hash_width;
+
+        b_iframe.style.height = hash_height;
+
+    }
+
+&lt;/script&gt;
+
+</code></pre>
+</div>
+
+<p>agent.html从URL中获得宽度值和高度值，并设置iframe的高度和宽度（因为agent.html在www.vincent1.com下，所以操作a.html时不受JavaScript的同源限制）</p>
+
+<p>4、iframe内容变化时可以通过setInterval结合以上方法定时更新iframe的高度值。</p>
+
+<h3 id="二easyxdm">二、easyXDM</h3>
+
+<p>easyXDM是一个较为成熟的js跨域解决方案，并且其对各种浏览器都有不同的解决方案，兼容性较好，网站：http://easyxdm.net/wp/ 。easyXDM网站上的例子（http://easyxdm.net/wp/category/examples/）代码可以从github上下载（https://github.com/oyvindkinsey/easyXDM），可在实际项目中用作参考。</p>
+
+<p>下面简单介绍下使用easyXDM来实现iframe高度自适应，页面中需要用到的两个文件：easyXDM.js、easyxdm.swf（用于兼容ie6、ie7）。</p>
+
+<p>easyXDM的使用使用了3个页面：当前查看页面(resize_iframe.html)，中间页面(resize_intermediate.html)，iframe嵌套页面(resized_iframe.html)。代码如下：</p>
+
+<p>resize_iframe.html：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+<span class="cp">&lt;!doctype html&gt;</span>
+
+<span class="nt">&lt;html&gt;</span>
+
+    <span class="nt">&lt;head&gt;</span>
+
+        <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+
+        <span class="nt">&lt;title&gt;</span>resize iframe<span class="nt">&lt;/title&gt;</span>
+
+        <span class="nt">&lt;style </span><span class="na">type=</span><span class="s">"text/css"</span><span class="nt">&gt;</span>
+
+            <span class="o">*</span> <span class="p">{</span>
+
+                <span class="nl">padding</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+
+                <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+
+                <span class="nl">outline</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+
+            <span class="p">}</span>
+
+            <span class="nt">body</span><span class="p">{</span>
+
+                <span class="nl">background-color</span><span class="p">:</span> <span class="m">#f5f8fa</span><span class="p">;</span>
+
+                <span class="nl">font-size</span><span class="p">:</span> <span class="m">16px</span><span class="p">;</span>
+
+                <span class="nl">padding</span><span class="p">:</span> <span class="m">50px</span> <span class="m">20px</span><span class="p">;</span>
+
+            <span class="p">}</span>
+
+            <span class="nt">p</span><span class="p">{</span>
+
+                <span class="nl">text-align</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+
+            <span class="p">}</span>
+
+            <span class="nt">iframe</span><span class="p">{</span>
+
+                <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+
+            <span class="p">}</span>
+
+        <span class="nt">&lt;/style&gt;</span>
+
+        <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"easyXDM.js"</span><span class="nt">&gt;</span>
+
+        <span class="nt">&lt;/script&gt;</span>
+
+        <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+
+            <span class="kd">var</span> <span class="nx">transport</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">easyXDM</span><span class="p">.</span><span class="nx">Socket</span><span class="p">(</span><span class="cm">/** The configuration */</span><span class="p">{</span>
+
+                <span class="na">remote</span><span class="p">:</span> <span class="s2">"http://www.vincent2.com:3000/easyxdm/resize_intermediate.html?url=resized_iframe.html"</span><span class="p">,</span>
+
+                <span class="na">swf</span><span class="p">:</span> <span class="s2">"easyxdm.swf"</span><span class="p">,</span>
+
+                <span class="na">container</span><span class="p">:</span> <span class="s2">"embedded"</span><span class="p">,</span>
+
+                <span class="na">onMessage</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">origin</span><span class="p">){</span>
+
+                    <span class="k">this</span><span class="p">.</span><span class="nx">container</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">"iframe"</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">style</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">message</span> <span class="o">+</span> <span class="s2">"px"</span><span class="p">;</span>
+
+                <span class="p">}</span>
+
+            <span class="p">});</span>
+
+        <span class="nt">&lt;/script&gt;</span>
+
+    <span class="nt">&lt;/head&gt;</span>
+
+    <span class="nt">&lt;body&gt;</span>
+
+        <span class="nt">&lt;p&gt;</span>www.vincent1.com<span class="nt">&lt;/p&gt;</span>
+
+        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"embedded"</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+    <span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;/html&gt;</span>
+
+</code></pre>
+</div>
+
+<p>resize_intermediate.html：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+<span class="cp">&lt;!doctype html&gt;</span>
+
+<span class="nt">&lt;html&gt;</span>
+
+    <span class="nt">&lt;head&gt;</span>
+
+        <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+
+        <span class="nt">&lt;title&gt;</span>resize iframe<span class="nt">&lt;/title&gt;</span>
+
+        <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"easyXDM.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+        <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+
+            <span class="kd">var</span> <span class="nx">iframe</span><span class="p">;</span>
+
+            <span class="kd">var</span> <span class="nx">socket</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">easyXDM</span><span class="p">.</span><span class="nx">Socket</span><span class="p">({</span>
+
+                <span class="na">swf</span> <span class="p">:</span> <span class="s2">"easyxdm.swf"</span><span class="p">,</span>
+
+                <span class="na">onReady</span> <span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+                    <span class="nx">iframe</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">"iframe"</span><span class="p">);</span>
+
+                    <span class="nx">iframe</span><span class="p">.</span><span class="nx">frameBorder</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+                    <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">iframe</span><span class="p">);</span>
+
+                    <span class="nx">iframe</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">easyXDM</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">url</span><span class="p">;</span>
+
+
+
+                    <span class="kd">var</span> <span class="nx">timer</span><span class="p">;</span>
+
+                    <span class="nx">iframe</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+                        <span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nx">iframe</span><span class="p">.</span><span class="nx">contentWindow</span><span class="p">.</span><span class="nb">document</span><span class="p">;</span>
+
+                        <span class="kd">var</span> <span class="nx">originalHeight</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">clientHeight</span> <span class="o">||</span> <span class="nx">d</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">offsetHeight</span> <span class="o">||</span> <span class="nx">d</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">scrollHeight</span><span class="p">;</span>
+
+
+
+                        <span class="c1">// We want to monitor the document for resize events in case of the use of accordions and such,</span>
+
+                        <span class="c1">// but unfortunately only the window node emits the resize event, and we need the body's.</span>
+
+                        <span class="c1">// The only solution then is to use polling..</span>
+
+
+
+                        <span class="c1">// Lets start the polling if not all ready started</span>
+
+                        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">timer</span><span class="p">)</span> <span class="p">{</span>
+
+                            <span class="nx">timer</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+                                <span class="k">try</span> <span class="p">{</span>
+
+                                    <span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nx">iframe</span><span class="p">.</span><span class="nx">contentWindow</span><span class="p">.</span><span class="nb">document</span><span class="p">;</span>
+
+                                    <span class="kd">var</span> <span class="nx">newHeight</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">clientHeight</span> <span class="o">||</span> <span class="nx">d</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">offsetHeight</span> <span class="o">||</span> <span class="nx">d</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">scrollHeight</span><span class="p">;</span>
+
+                                    <span class="k">if</span><span class="p">(</span><span class="nx">newHeight</span> <span class="o">!=</span> <span class="nx">originalHeight</span><span class="p">)</span> <span class="p">{</span>
+
+                                        <span class="c1">// The height has changed since last we checked</span>
+
+                                        <span class="nx">originalHeight</span> <span class="o">=</span> <span class="nx">newHeight</span><span class="p">;</span>
+
+                                        <span class="nx">socket</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="nx">originalHeight</span><span class="p">);</span>
+
+                                    <span class="p">}</span>
+
+                                <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+
+                                    <span class="c1">// We tried to read the property at some point when it wasn't available</span>
+
+                                <span class="p">}</span>
+
+                            <span class="p">},</span> <span class="mi">300</span><span class="p">);</span>
+
+                        <span class="p">}</span>
+
+                        <span class="c1">// Send the first message</span>
+
+                        <span class="nx">socket</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="nx">originalHeight</span><span class="p">);</span>
+
+                    <span class="p">};</span>
+
+                <span class="p">},</span>
+
+                <span class="na">onMessage</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">origin</span><span class="p">)</span> <span class="p">{</span>
+
+                    <span class="nx">iframe</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">url</span><span class="p">;</span>
+
+                <span class="p">}</span>
+
+            <span class="p">});</span>
+
+
+
+        <span class="nt">&lt;/script&gt;</span>
+
+        <span class="nt">&lt;style </span><span class="na">type=</span><span class="s">"text/css"</span><span class="nt">&gt;</span>
+
+            <span class="nt">html</span><span class="o">,</span> <span class="nt">body</span> <span class="p">{</span>
+
+                <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
+
+                <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+
+                <span class="nl">padding</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+
+                <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+
+                <span class="nl">height</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+
+            <span class="p">}</span>
+
+            <span class="nt">iframe</span> <span class="p">{</span>
+
+                <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+
+                <span class="nl">height</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+
+                <span class="nl">border</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+
+            <span class="p">}</span>
+
+        <span class="nt">&lt;/style&gt;</span>
+
+    <span class="nt">&lt;/head&gt;</span>
+
+    <span class="nt">&lt;body&gt;&lt;/body&gt;</span>
+
+<span class="nt">&lt;/html&gt;</span>
+
+</code></pre>
+</div>
+
+<p>resized_iframe.html：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+<span class="cp">&lt;!doctype html&gt;</span>
+
+<span class="nt">&lt;html&gt;</span>
+
+    <span class="nt">&lt;head&gt;</span>
+
+        <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+
+        <span class="nt">&lt;title&gt;</span>resize iframe<span class="nt">&lt;/title&gt;</span>
+
+        <span class="nt">&lt;style </span><span class="na">type=</span><span class="s">"text/css"</span><span class="nt">&gt;</span>
+
+            <span class="o">*</span> <span class="p">{</span>
+
+                <span class="nl">padding</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+
+                <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+
+                <span class="nl">outline</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+
+            <span class="p">}</span>
+
+            <span class="nt">body</span><span class="p">{</span>
+
+                <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
+
+                <span class="nl">background-color</span><span class="p">:</span> <span class="m">#f5f8fa</span><span class="p">;</span>
+
+                <span class="nl">font-size</span><span class="p">:</span> <span class="m">16px</span><span class="p">;</span>
+
+                <span class="nl">padding</span><span class="p">:</span> <span class="m">50px</span> <span class="m">20px</span><span class="p">;</span>
+
+            <span class="p">}</span>
+
+            <span class="nt">p</span><span class="p">{</span>
+
+                <span class="nl">height</span><span class="p">:</span> <span class="m">1000px</span><span class="p">;</span>
+
+                <span class="nl">background-color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+
+                <span class="nl">text-align</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+
+            <span class="p">}</span>
+
+        <span class="nt">&lt;/style&gt;</span>
+
+    <span class="nt">&lt;/head&gt;</span>
+
+    <span class="nt">&lt;body&gt;</span>
+
+        <span class="nt">&lt;p&gt;</span>www.vincent2.com<span class="nt">&lt;/p&gt;</span>
+
+    <span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;/html&gt;</span>
+
+</code></pre>
+</div>
+
+<h3 id="三代码地址">三、代码地址</h3>
+
+<p>以上各方法的demo可在github上下载，github地址：https://github.com/wangjiling/resize_iframe，兼容 IE7+、Opera 9+、Firefox 3+、Safari 4+、Chrome 2+，有问题可以github上提issues或发消息给公众号。</p>
+
+      <div class="page-footer">
+        <div class="page-share">
+          <a href="https://twitter.com/intent/tweet?text=iframe高度自适应&url=/2016/12/12/js-iframe-height-adaptive/" title="Share on Twitter" rel="nofollow" target="_blank">Twitter</a>
+          <a href="https://facebook.com/sharer.php?u=/2016/12/12/js-iframe-height-adaptive/" title="Share on Facebook" rel="nofollow" target="_blank">Facebook</a>
+          <a href="https://plus.google.com/share?url=/2016/12/12/js-iframe-height-adaptive/" title="Share on Google+" rel="nofollow" target="_blank">Google+</a>
+        </div>
+        <div class="page-tag">
+          
+            <a href="/tags#Programming" class="tag">&#35; Programming</a>
+          
+            <a href="/tags#Learn" class="tag">&#35; Learn</a>
+          
+        </div>
+      </div>
+      <section class="comment-area">
+  <!--PC和WAP自适应版-->
+  <div id="SOHUCS" sid="/2016/12/12/js-iframe-height-adaptive" ></div>
+  <script type="text/javascript">
+      (function(){
+          var appid = 'cytqkAhNv';
+          var conf = 'prod_6e8ce9f2b9b375457313cf45a53ca895';
+          var width = window.innerWidth || document.documentElement.clientWidth;
+          if (width < 960) {
+              window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("http://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+</section>
+
+    </div> <!-- End Wrap Content -->
+  </div> <!-- End Page Content -->
+</article> <!-- End Article Page -->
+
+</div>
+
+  </div>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111688204-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-111688204-1');
+</script>
+
+<!-- baidu -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?4203e28ed2486071d9be8be5ac2e99cd";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+</body>
+</html>

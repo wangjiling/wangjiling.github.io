@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>刨根问底，CSS3圆角使用</title>
+
+  <!-- Edit site and author settings in `_config.yml` to make the social details your own -->
+
+    <meta content="WEB前端学习分享" property="og:site_name">
+  
+    <meta content="刨根问底，CSS3圆角使用" property="og:title">
+  
+  
+    <meta content="article" property="og:type">
+  
+  
+    <meta content="刨根问底，CSS3圆角使用" property="og:description">
+  
+  
+    <meta content="/2016/11/15/css-border-radius/" property="og:url">
+  
+  
+    <meta content="2016-11-15T00:00:00+08:00" property="article:published_time">
+    <meta content="/about/" property="article:author">
+  
+  
+    <meta content="/assets/img/web-dev.jpeg" property="og:image">
+  
+  
+    
+  
+  
+    
+    <meta content="Programming" property="article:tag">
+    
+    <meta content="Learn" property="article:tag">
+    
+  
+
+  
+    <meta name="twitter:card" content="刨根问底，CSS3圆角使用">
+  
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+  
+    <meta name="twitter:title" content="刨根问底，CSS3圆角使用">
+  
+  
+    <meta name="twitter:url" content="/2016/11/15/css-border-radius/">
+  
+  
+    <meta name="twitter:description" content="刨根问底，CSS3圆角使用">
+  
+  
+    <meta name="twitter:image:src" content="/assets/img/web-dev.jpeg">
+  
+
+	<meta name="description" content="刨根问底，CSS3圆角使用">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta property="og:image" content="">
+	<link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" type="image/x-icon">
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#263959">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#263959">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#263959">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=PT+Serif:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="/assets/fonts/font-awesome/css/font-awesome.min.css">
+	<!-- Styles -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <aside class="sidebar">
+  <header>
+    <div class="about">
+      <div class="cover-author-image">
+        <a href="/"><img src="/assets/img/vincent-wang.png" alt="Vincent Wang"></a>
+      </div>
+      <div class="author-name">Vincent Wang</div>
+      <p>前端开发工程师，现专注于web前端领域相关的技术开发和新技术的调研</p>
+    </div>
+  </header> <!-- End Header -->
+  <footer>
+    <section class="contact">
+      <h3 class="contact-title">Contact me</h3>
+      <ul>
+        
+          <li><a href="https://twitter.com/wangjiling" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+        
+        
+          <li><a href="https://facebook.com/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+        
+        
+          <li class="github"><a href="https://github.com/wangjiling" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+        
+          <li class="linkedin"><a href="https://in.linkedin.com/" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+        
+        
+          <li class="email"><a href="mailto:vincentwangjiling@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
+        
+      </ul>
+    </section> <!-- End Section Contact -->
+    <div class="copyright">
+      <p>2016-2019 &copy; Vincent Wang</p>
+      <p><a target="_blank" href="http://www.miitbeian.gov.cn">沪ICP备17029424号</a></p>
+    </div>
+  </footer> <!-- End Footer -->
+</aside> <!-- End Sidebar -->
+<div class="content-box clearfix">
+  <article class="article-page">
+  <div class="page-content">
+    
+    <div class="page-cover-image">
+      <img class="page-image" src=/assets/img/web-dev.jpeg alt="刨根问底，CSS3圆角使用">
+    </div> <!-- End Page Cover Image -->
+    
+    <div class="wrap-content">
+      <header class="header-page">
+        <h1 class="page-title">刨根问底，CSS3圆角使用</h1>
+        <div class="page-date"><span>2016, Nov 15&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+      </header>
+      <h3 id="引言">引言</h3>
+
+<p>web开发中使用css对页面进行排版布局，CSS3是层叠样式表（Cascading StyleSheet）语言的最新版本，它的一大优点就是支持圆角。本文根据实际项目开发经验，对border-radius进行详细讲解。</p>
+
+<h3 id="css3-border-radius使用">CSS3 border-radius使用</h3>
+
+<p>一、CSS3圆角的优点</p>
+
+<p>传统的圆角生成方案，必须使用多张图片作为背景图案。CSS3的出现，使得我们再也不必浪费时间去制作这些图片了，而且还有其他多个优点：</p>
+
+<p>　　* 减少维护的工作量。图片文件的生成、更新、编写网页代码，这些工作都不再需要了。</p>
+
+<p>　　* 提高网页性能。由于不必再发出多余的HTTP请求，网页的载入速度将变快。</p>
+
+<ul>
+  <li>增加视觉可靠性。某些情况下（网络拥堵、服务器出错、网速过慢等等），背景图片会下载失败，导致视觉效果不佳。CSS3就不会发生这种情况。</li>
+</ul>
+
+<p>二、border-radius属性</p>
+
+<p>CSS3圆角只需设置一个属性：border-radius（含义是”边框半径”）。你为这个属性提供一个值，就能同时设置四个圆角的半径。所有合法的CSS度量值都可以使用：em、ex、pt、px、百分比等等。</p>
+
+<p>1、border-radius: 15px;</p>
+
+<p>这条语句同时将每个圆角的”水平半径”（horizontal radius）和”垂直半径”（vertical radius）都设置为15px。</p>
+
+<p>2、border-radius可以同时设置1到4个值。如果设置1个值，表示4个圆角都使用这个值。如果设置两个值，表示左上角和右下角使用第一个值，右上角和左下角使用第二个值。如果设置三个值，表示左上角使用第一个值，右上角和左下角使用第二个值，右下角使用第三个值。如果设置四个值，则依次对应左上角、右上角、右下角、左下角（顺时针顺序）</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+　　border-radius: 15px 5px;
+
+　　border-radius: 15px 5px 25px;
+
+　　border-radius: 15px 5px 25px 0px;
+
+</code></pre>
+</div>
+
+<p>（左下角的半径为0，就变成直角了。）</p>
+
+<p>3、border-radius还可以用斜杠设置第二组值。这时，第一组值表示水平半径，第二组值表示垂直半径。第二组值也可以同时设置1到4个值，应用规则与第一组值相同。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+　　border-radius: 15px 5px / 3px;
+
+　　border-radius: 15px 5px 25px / 3px 5px;
+
+   border-radius: 15px 5px 25px 5px / 3px 5px 10px 15px;
+
+</code></pre>
+</div>
+
+<p>三、单个圆角的设置</p>
+
+<p>除了同时设置四个圆角以外，还可以单独对每个角进行设置。对应四个角，CSS3提供四个单独的属性：</p>
+
+<p>　　* border-top-left-radius</p>
+
+<p>　　* border-top-right-radius</p>
+
+<p>　　* border-bottom-right-radius</p>
+
+<p>　　* border-bottom-left-radius</p>
+
+<p>这四个属性都可以同时设置1到2个值。如果设置1个值，表示水平半径与垂直半径相等。如果设置2个值，第一个值表示水平半径，第二个值表示垂直半径。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+　　border-top-left-radius: 15px;
+
+　　border-top-left-radius: 15px 5px;
+
+</code></pre>
+</div>
+
+<p>四、浏览器支持</p>
+
+<p>IE 9＋、Opera 10.5、Safari 5、Chrome 4和Firefox 4，都支持上述的border-radius属性。早期版本的Safari和Chrome，支持-webkit-border-radius属性，早期版本的Firefox支持-moz-border-radius属性。</p>
+
+<p>（注意：border-radius必须放在最后声明，否则可能会失效。）</p>
+
+<p>另外，早期版本Firefox的单个圆角的语句，与标准语法略有不同。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+　　-moz-border-radius-topleft（标准语法：border-top-left-radius）
+
+　　-moz-border-radius-topright（标准语法：border-top-right-radius）
+
+   -moz-border-radius-bottomleft（标准语法：border-bottom-left-radius）
+
+   -moz-border-radius-bottomrigh（标准语法：border-bottom-right-radius）
+
+</code></pre>
+</div>
+
+<p>五、注意事项</p>
+
+<p>虽然各大浏览器都支持border-radius，但是在某些细节上，实现都不一样。当四个角的颜色、宽度、风格（实线框、虚线框等）、单位都相同时，所有浏览器的渲染结果基本一致；一旦四个角的设置不相同，就会出现很大的差异。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+　　border-color: black;
+
+　　border-style: solid dashed;
+
+　　border-width: 1px 2px 3px;
+
+　　border-top-color: red;
+
+　　border-radius: 5%;
+
+</code></pre>
+</div>
+
+<p>另外，并非所有浏览器，都支持将圆角半径设为一个百分比值。因此，目前最安全的做法，就是将每个圆角边框的风格和宽度，都设为一样的值，并且避免使用百分比值。</p>
+
+<h3 id="css3-border-radius-浏览器兼容">CSS3 border-radius 浏览器兼容</h3>
+
+<p>CSS3 border-radius可以轻易实现圆还有圆角效果，然而，需要IE9+浏览器才行。移动端自然不成问题，但是众多（尤其面向C侧）PC页面是至少需要兼容IE8的，那有没有什么办法可以让IE7, IE8也支持圆角呢？</p>
+
+<p>让低版本IE支持CSS3圆角属性的工具有很多，如DD_roundies：http://www.dillerdesign.com/experiment/DD_roundies/、curved-corner：http://www.htmlremix.com/css/curved-corner-border-radius-cross-browser、ie-css3.htc等。</p>
+
+<p>本文要展示的这个方法名为PIE，这里PIE实际上是指的是一个名为pie的htc文件，即pie.htc（http://css3pie.com/）。使用CSS的behavior行为，可以调用此文件，然后让IE也能实现一些常见的CSS3效果，这些CSS3效果实现是借助于VML，如圆角(border-radius)，盒阴影(box-shadow)，背景渐变(gradient)，多图片背景(multiple background images)、边框图片(border-image)等。</p>
+
+<p>一、相关概念理解</p>
+
+<p>1、behavior属性语法：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+behavior:url(url)|url(#objID)|url(#default#behaviorName)
+
+</code></pre>
+</div>
+
+<p>取值：</p>
+
+<p>url(url)　:　使用绝对或相对url地址指定DHTML行为组件（.htc）</p>
+
+<p>url(#objID)　:　用二进制实现DHTML行为，#objID为object对象指定的id特性</p>
+
+<p>url(#default#behaviorName)　:　IE的默认行为。由行为的名称标识(#behaviorName)指定</p>
+
+<p>说明：设置或检索对象的DHTML行为。多个行为之间用空格隔开。对应的脚本特性为behavior。</p>
+
+<p>示例：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+div{behavior:url(fly.htc) url(shy.htc);}
+
+div{behavior:url(#myObject);}
+
+p{behavior:url(#default#download);}
+
+</code></pre>
+</div>
+
+<p>2、htc：</p>
+
+<p>从5.5版本开始，Internet Explorer（IE）开始支持Web 行为的概念。这些行为是由后缀名为.htc的脚本文件描述的，它们定义了一套方法和属性，程序员几乎可以把这些方法和属性应用到HTML页面上的任何元素上去。Web 行为是非常伟大的因为它们允许程序员把自定义的功能“连接”到现有的元素和控件，而不是必须让用户下载二进制文件（例如ActiveX 控件）来完成这个功能。Web 行为还是推荐的扩展IE对象模型和控件集的方法。.htc文件其实就是个脚本文件，与js文件属于同一类，只是htc是Internet Explorer(IE)的私生子，只有IE才认它。</p>
+
+<p>3、VML：</p>
+
+<p>VML是The Vector Markup Language(矢量可标记语言)的缩写。VML用于将图形数据矢量化的标记语言。这是一种基于 XML 语法的语言，由 AutoDesk 、 Macromedia 和 Microsoft 和 HP 公司向 W3C 提出的方案。VML相当于IE里面的画笔，能实现你所想要的图形，而且结合脚本，可以让图形产生动态的效果。IE私生子htc加上IE私有画笔VML就可以实现一些IE专有的图形与表现了，正好可以就此实现一些IE不支持的CSS3效果。</p>
+
+<p>二、Pie.htc使用步骤（官网）：</p>
+
+<p>Step 1: Download it</p>
+
+<p>Download the PIE distribution and unzip it somewhere.</p>
+
+<p>Step 2: Upload it</p>
+
+<p>Upload the contents of the unzipped package to a directory on your web server. It doesn’t matter where exactly, as long as you know where it is.</p>
+
+<p>Step 3: Write some CSS3</p>
+
+<p>Assuming you already have a HTML document, let’s say you want to give one of its elements rounded corners. Create a CSS rule for that element and give it a border-radius style like so:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+#myAwesomeElement {
+
+    border: 1px solid #999;
+
+    -webkit-border-radius: 10px;
+
+    -moz-border-radius: 10px;
+
+    border-radius: 10px;
+
+}
+
+</code></pre>
+</div>
+
+<p>(Note the -webkit- and -moz- prefixed versions; these are necessary to make the rounded corners work in WebKit and Mozilla-based browsers.)</p>
+
+<p>Step 4: Apply PIE</p>
+
+<p>In that same CSS rule, add the following style line:</p>
+
+<p>behavior: url(path/to/pie_files/PIE.htc);</p>
+
+<p>Of course you will need to adjust the path to match where you uploaded PIE.htc in step 2. Note: this path is relative to the HTML file being viewed, not the CSS file it is called from.</p>
+
+<p>Step 5: View it in IE</p>
+
+<p>If all went well, at this point you should be able to load the page in IE and see the CSS3 rounded corners rendered just like other browsers.</p>
+
+<p>三、pie.htc方法并不是万能的，也有一些局限性和需要注意的地方</p>
+
+<ol>
+  <li>z-index相关问题
+IE下这些CSS3效果实现是借助于VML，由VML绘制圆角或是投影效果的容器元素，然后这个容器元素作为目标元素的前兄弟节点插入，如果目标元素position:absolute 或是 position:relative，则这个css3-Container元素将会设置与之一样的z-index值，在DOM tree中，同级的元素总是后面的覆盖前面的，所以这样就实现了覆盖，又避免了可能有其他元素正好插入其中。</li>
+</ol>
+
+<p>所以，问题来了，如果目前元素的position属性为static，也就是默认属性，则z-index属性是没有用的，无覆盖可言，所以此时IE浏览器下CSS3的渲染是不会成功的。要解决也很简单，设置目标元素position:relative或是设置祖先元素position:relative并赋予一个z-index值（不可为-1）。</p>
+
+<ol>
+  <li>
+    <p>相当路径的问题
+IE浏览器的behavior 属性是相对于HTML文档而言的，与CSS其他的属性不一样，不是相对于CSS文档而言的。这使得使用pie.htc文件不怎么方面。如果绝对路径于根目录，则CSS文件不方便移动；如果相对路径与HTML文档，则pie.htc文件在不同HTML页面见的重用性大大降低。</p>
+  </li>
+  <li>
+    <p>缩写的问题
+使用PIE实现IE下的CSS3渲染（其他方法也是一样），只能使用缩写的形式，例如圆角效果，我们可以设置border-top-left-radius表示左上圆角，但是PIE确实不支持这种写法的，只能是老老实实的缩写。</p>
+  </li>
+  <li>
+    <p>提供正确的Content-Type
+要想让IE浏览器支持htc文件，需要一个有着”text/x-component” 字样的content-type 头部，否则，会忽视behavior。绝大数web服务器提供了正确的content-type，但是还有一部分则有问题。如果您发现在您的机子上PIE方法无效，也就是htc文件这里指pie.htc文件无效，检查您的服务器配置，可能其需要更新到最新的content-type。例如对于Apache，您可以在.htaccess文件中左如下处理：</p>
+  </li>
+</ol>
+
+<p>AddType text/x-component .htc</p>
+
+<p>附带一个IE7,IE8浏览器纯CSS实现正圆角效果</p>
+
+<p>CSS代码：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+.box {
+
+    width: 150px; height: 150px;
+
+    line-height: 150px;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+.radius {
+
+    position: absolute;
+
+    width: 100%; height: 100%;
+
+    border-radius: 50%;
+
+    border: 149px dotted;
+
+    /* IE7,IE8圆尺寸要小1像素同时有1像素偏移 */
+
+    margin: 0 0 1px 1px;
+
+    border-width: 0vw;
+
+    margin: 0vw;
+
+    color: #cd0000;
+
+    background-color: currentColor;
+
+}
+
+.text {
+
+    position: relative;
+
+    color: #fff;
+
+    text-align: center;
+
+    font-size: 24px;
+
+}
+
+</code></pre>
+</div>
+
+<p>HTML代码：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+&lt;div class="box"&gt;
+
+    &lt;i class="radius"&gt;&lt;/i&gt;
+
+    &lt;p class="text"&gt;美女&lt;/p&gt;
+
+&lt;/div&gt;
+
+</code></pre>
+</div>
+
+<h3 id="总结">总结</h3>
+
+<p>css3圆角的使用让web页面效果更加酷炫，但是各类让低版本浏览器支持部分css3效果的代码都很复杂，一般人不精通js和vml绘制是修改解决不了的，普遍问题就是在特殊情况下会出现一些怪毛病很难解决。要保证效果就老老实实做图片圆角css2拼背景 ；要不就降级体验，让低版本浏览器直接显示直角，高版本浏览器显示圆角。</p>
+
+      <div class="page-footer">
+        <div class="page-share">
+          <a href="https://twitter.com/intent/tweet?text=刨根问底，CSS3圆角使用&url=/2016/11/15/css-border-radius/" title="Share on Twitter" rel="nofollow" target="_blank">Twitter</a>
+          <a href="https://facebook.com/sharer.php?u=/2016/11/15/css-border-radius/" title="Share on Facebook" rel="nofollow" target="_blank">Facebook</a>
+          <a href="https://plus.google.com/share?url=/2016/11/15/css-border-radius/" title="Share on Google+" rel="nofollow" target="_blank">Google+</a>
+        </div>
+        <div class="page-tag">
+          
+            <a href="/tags#Programming" class="tag">&#35; Programming</a>
+          
+            <a href="/tags#Learn" class="tag">&#35; Learn</a>
+          
+        </div>
+      </div>
+      <section class="comment-area">
+  <!--PC和WAP自适应版-->
+  <div id="SOHUCS" sid="/2016/11/15/css-border-radius" ></div>
+  <script type="text/javascript">
+      (function(){
+          var appid = 'cytqkAhNv';
+          var conf = 'prod_6e8ce9f2b9b375457313cf45a53ca895';
+          var width = window.innerWidth || document.documentElement.clientWidth;
+          if (width < 960) {
+              window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("http://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+</section>
+
+    </div> <!-- End Wrap Content -->
+  </div> <!-- End Page Content -->
+</article> <!-- End Article Page -->
+
+</div>
+
+  </div>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111688204-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-111688204-1');
+</script>
+
+<!-- baidu -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?4203e28ed2486071d9be8be5ac2e99cd";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+</body>
+</html>
