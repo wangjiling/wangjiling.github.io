@@ -167,20 +167,27 @@
       </div>
       <section class="comment-area">
   <!--PC和WAP自适应版-->
-  <div id="SOHUCS" sid="/2016/08/01/welcome-to-jekyll"></div>
+  <div id="SOHUCS"></div>
   <script type="text/javascript">
     (function () {
       var appid = "cytqkAhNv";
       var conf = "prod_6e8ce9f2b9b375457313cf45a53ca895";
       var width = window.innerWidth || document.documentElement.clientWidth;
-      if (width < 960) {
-        window.document.write(
-          '<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' +
-            appid +
-            "&conf=" +
-            conf +
-            '"><\/script>'
-        );
+      if (width < 1000) {
+        var head =
+          document.getElementsByTagName("head")[0] ||
+          document.head ||
+          document.documentElement;
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.charset = "utf-8";
+        script.id = "changyan_mobile_js";
+        script.src =
+          "https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=" +
+          appid +
+          "&conf=" +
+          conf;
+        head.appendChild(script);
       } else {
         var loadJs = function (d, a) {
           var c =
@@ -206,7 +213,7 @@
           }
           c.appendChild(b);
         };
-        loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
+        loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js", function () {
           window.changyan.api.config({ appid: appid, conf: conf });
         });
       }
