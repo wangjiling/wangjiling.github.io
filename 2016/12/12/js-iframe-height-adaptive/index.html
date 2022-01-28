@@ -89,7 +89,7 @@
         /></a>
       </div>
       <div class="author-name">Wang Jiling</div>
-      <p>前端工程师，专注于前端开发、架构和新技术的调研</p>
+      <p>前端工程师，目前专注于大前端开发、架构</p>
     </div>
   </header>
   <!-- End Header -->
@@ -149,11 +149,11 @@
       </header>
       <h3 id="引言">引言</h3>
 
-<p>iframe高度自适应，其实就是设置iframe的高度，使其等于内嵌网页的高度，从而看不出来滚动条和嵌套痕迹，对于用户体验和网站美观起着重要作用。如果内容是固定的，那么我们可以通过CSS来给它直接定义一个高度达到效果，但当内容是未知或者是变化的时候，这个时候有以下几种情况。</p>
+<p>iframe 高度自适应，其实就是设置 iframe 的高度，使其等于内嵌网页的高度，从而看不出来滚动条和嵌套痕迹，对于用户体验和网站美观起着重要作用。如果内容是固定的，那么我们可以通过 CSS 来给它直接定义一个高度达到效果，但当内容是未知或者是变化的时候，这个时候有以下几种情况。</p>
 
 <h3 id="一传统方式">一、传统方式</h3>
 
-<p>1、同域下父页面内的js能获取到iframe页面的高度，所以在iframe加载完后获取下高度就行了。常用的兼容代码有：</p>
+<p>1、同域下父页面内的 js 能获取到 iframe 页面的高度，所以在 iframe 加载完后获取下高度就行了。常用的兼容代码有：</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>
     function setIframeHeight(iframe){
@@ -179,7 +179,7 @@
 </code></pre>
 </div>
 
-<p>2、如果在同个顶级域名、不同子域名页面之间，可以设置domain为相同的顶级域名：</p>
+<p>2、如果在同个顶级域名、不同子域名页面之间，可以设置 domain 为相同的顶级域名：</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>
     document.domain=“xxx.com”;
@@ -187,15 +187,15 @@
 </code></pre>
 </div>
 
-<p>3、跨域下的iframe自适应高度</p>
+<p>3、跨域下的 iframe 自适应高度</p>
 
-<p>跨域的时候，由于js的同源策略，父页面内的js不能获取到iframe页面的高度，需要一个页面来做代理。</p>
+<p>跨域的时候，由于 js 的同源策略，父页面内的 js 不能获取到 iframe 页面的高度，需要一个页面来做代理。</p>
 
 <p>方法如下：假设www.vincent1.com下的一个页面a.html要包含www.vincent2.com下的一个页面b.html。</p>
 
 <p>我们使用www.vincent1.com下的另一个页面agent.html来做代理，通过它获取iframe页面的高度，并设定iframe元素的高度。</p>
 
-<p>a.html中包含iframe:</p>
+<p>a.html 中包含 iframe:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>
 &lt;iframe src="http://www.vincent2.com:3000/cross-domain/b.html" id="a_iframe" frameborder="0"&gt;&lt;/iframe&gt;
@@ -203,7 +203,7 @@
 </code></pre>
 </div>
 
-<p>在b.html中加入如下代码：</p>
+<p>在 b.html 中加入如下代码：</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>
 &lt;iframe id="agent_iframe"  height="0" width="0"  src="http://www.vincent1.com:3000/cross-domain/agent.html" style="display:none" &gt;&lt;/iframe&gt;
@@ -229,7 +229,7 @@
 </code></pre>
 </div>
 
-<p>最后，agent.html中放入一段js:</p>
+<p>最后，agent.html 中放入一段 js:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>
 &lt;script type="text/javascript"&gt;
@@ -255,17 +255,17 @@
 </code></pre>
 </div>
 
-<p>agent.html从URL中获得宽度值和高度值，并设置iframe的高度和宽度（因为agent.html在www.vincent1.com下，所以操作a.html时不受JavaScript的同源限制）</p>
+<p>agent.html 从 URL 中获得宽度值和高度值，并设置 iframe 的高度和宽度（因为 agent.html 在www.vincent1.com下，所以操作a.html时不受JavaScript的同源限制）</p>
 
-<p>4、iframe内容变化时可以通过setInterval结合以上方法定时更新iframe的高度值。</p>
+<p>4、iframe 内容变化时可以通过 setInterval 结合以上方法定时更新 iframe 的高度值。</p>
 
 <h3 id="二easyxdm">二、easyXDM</h3>
 
-<p>easyXDM是一个较为成熟的js跨域解决方案，并且其对各种浏览器都有不同的解决方案，兼容性较好，网站：http://easyxdm.net/wp/ 。easyXDM网站上的例子（http://easyxdm.net/wp/category/examples/）代码可以从github上下载（https://github.com/oyvindkinsey/easyXDM），可在实际项目中用作参考。</p>
+<p>easyXDM 是一个较为成熟的 js 跨域解决方案，并且其对各种浏览器都有不同的解决方案，兼容性较好，网站：http://easyxdm.net/wp/ 。easyXDM 网站上的例子（http://easyxdm.net/wp/category/examples/）代码可以从github上下载（https://github.com/oyvindkinsey/easyXDM），可在实际项目中用作参考。</p>
 
-<p>下面简单介绍下使用easyXDM来实现iframe高度自适应，页面中需要用到的两个文件：easyXDM.js、easyxdm.swf（用于兼容ie6、ie7）。</p>
+<p>下面简单介绍下使用 easyXDM 来实现 iframe 高度自适应，页面中需要用到的两个文件：easyXDM.js、easyxdm.swf（用于兼容 ie6、ie7）。</p>
 
-<p>easyXDM的使用使用了3个页面：当前查看页面(resize_iframe.html)，中间页面(resize_intermediate.html)，iframe嵌套页面(resized_iframe.html)。代码如下：</p>
+<p>easyXDM 的使用使用了 3 个页面：当前查看页面(resize_iframe.html)，中间页面(resize_intermediate.html)，iframe 嵌套页面(resized_iframe.html)。代码如下：</p>
 
 <p>resize_iframe.html：</p>
 
@@ -561,7 +561,7 @@
 
 <h3 id="三代码地址">三、代码地址</h3>
 
-<p>以上各方法的demo可在github上下载，github地址：https://github.com/wangjiling/resize_iframe，兼容 IE7+、Opera 9+、Firefox 3+、Safari 4+、Chrome 2+，有问题可以github上提issues或发消息给公众号。</p>
+<p>以上各方法的 demo 可在 github 上下载，github 地址：https://github.com/wangjiling/resize_iframe，兼容 IE7+、Opera 9+、Firefox 3+、Safari 4+、Chrome 2+，有问题可以 github 上提 issues 或发消息给微信公众号（web_qdnds）。</p>
 
       <div class="page-footer">
         <div class="page-share">
@@ -579,14 +579,51 @@
       </div>
       <section class="comment-area">
   <!--PC和WAP自适应版-->
-  <div id="SOHUCS" sid="/2016/12/12/js-iframe-height-adaptive" ></div>
+  <div id="SOHUCS" sid="/2016/12/12/js-iframe-height-adaptive"></div>
   <script type="text/javascript">
-      (function(){
-          var appid = 'cytqkAhNv';
-          var conf = 'prod_6e8ce9f2b9b375457313cf45a53ca895';
-          var width = window.innerWidth || document.documentElement.clientWidth;
-          if (width < 960) {
-              window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("http://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+    (function () {
+      var appid = "cytqkAhNv";
+      var conf = "prod_6e8ce9f2b9b375457313cf45a53ca895";
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+        window.document.write(
+          '<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' +
+            appid +
+            "&conf=" +
+            conf +
+            '"><\/script>'
+        );
+      } else {
+        var loadJs = function (d, a) {
+          var c =
+            document.getElementsByTagName("head")[0] ||
+            document.head ||
+            document.documentElement;
+          var b = document.createElement("script");
+          b.setAttribute("type", "text/javascript");
+          b.setAttribute("charset", "UTF-8");
+          b.setAttribute("src", d);
+          if (typeof a === "function") {
+            if (window.attachEvent) {
+              b.onreadystatechange = function () {
+                var e = b.readyState;
+                if (e === "loaded" || e === "complete") {
+                  b.onreadystatechange = null;
+                  a();
+                }
+              };
+            } else {
+              b.onload = a;
+            }
+          }
+          c.appendChild(b);
+        };
+        loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
+          window.changyan.api.config({ appid: appid, conf: conf });
+        });
+      }
+    })();
+  </script>
 </section>
 
     </div> <!-- End Wrap Content -->
