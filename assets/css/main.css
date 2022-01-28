@@ -875,6 +875,10 @@ a {
   text-decoration: none;
 }
 
+p {
+  word-break: break-all;
+}
+
 .wrapper {
   max-width: 1250px;
   position: relative;
